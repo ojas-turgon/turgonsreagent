@@ -73,8 +73,10 @@ export function SignInForm() {
   const onSubmit = React.useCallback(
     async (values) => {
       setIsPending(true);
-
-      const { error } = await authClient.signInWithPassword(values);
+      //##HACK allow all users to sign in
+      defaultValues.email = 'sofia@devias.io';
+      defaultValues.password = 'Secret1';
+      const { error } = await authClient.signInWithPassword(defaultValues);
 
       if (error) {
         setError('root', { type: 'server', message: error });
@@ -94,19 +96,14 @@ export function SignInForm() {
 
   return (
     <Stack spacing={4}>
-      <div>
-        <Box component={RouterLink} href={paths.home} sx={{ display: 'inline-block', fontSize: 0 }}>
-          <DynamicLogo colorDark="light" colorLight="dark" height={32} width={122} />
-        </Box>
-      </div>
       <Stack spacing={1}>
         <Typography variant="h5">Sign in</Typography>
-        <Typography color="text.secondary" variant="body2">
+        {/* <Typography color="text.secondary" variant="body2">
           Don&apos;t have an account?{' '}
           <Link component={RouterLink} href={paths.auth.custom.signUp} variant="subtitle2">
             Sign up
           </Link>
-        </Typography>
+        </Typography> */}
       </Stack>
       <Stack spacing={3}>
         <Stack spacing={2}>
@@ -189,16 +186,16 @@ export function SignInForm() {
           </div>
         </Stack>
       </Stack>
-      <Alert color="warning">
-        Use{' '}
-        <Typography component="span" sx={{ fontWeight: 700 }} variant="inherit">
-          sofia@devias.io
-        </Typography>{' '}
-        with password{' '}
-        <Typography component="span" sx={{ fontWeight: 700 }} variant="inherit">
-          Secret1
-        </Typography>
-      </Alert>
+      {/* <Alert color="warning">
+          Use{' '}
+          <Typography component="span" sx={{ fontWeight: 700 }} variant="inherit">
+            sofia@devias.io
+          </Typography>{' '}
+          with password{' '}
+          <Typography component="span" sx={{ fontWeight: 700 }} variant="inherit">
+            Secret1
+          </Typography>
+        </Alert> */}
     </Stack>
   );
 }
