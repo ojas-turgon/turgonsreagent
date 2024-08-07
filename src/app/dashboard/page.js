@@ -1,17 +1,11 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import Divider from '@mui/material/Divider';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Unstable_Grid2';
-import { ArrowRight as ArrowRightIcon } from '@phosphor-icons/react/dist/ssr/ArrowRight';
-import { Briefcase as BriefcaseIcon } from '@phosphor-icons/react/dist/ssr/Briefcase';
-import { FileCode as FileCodeIcon } from '@phosphor-icons/react/dist/ssr/FileCode';
-import { Info as InfoIcon } from '@phosphor-icons/react/dist/ssr/Info';
 import { ListChecks as ListChecksIcon } from '@phosphor-icons/react/dist/ssr/ListChecks';
-import { Plus as PlusIcon } from '@phosphor-icons/react/dist/ssr/Plus';
 import { Users as UsersIcon } from '@phosphor-icons/react/dist/ssr/Users';
 import { Warning as WarningIcon } from '@phosphor-icons/react/dist/ssr/Warning';
 
@@ -22,12 +16,7 @@ import { OrdersFilters } from '@/components/dashboard/order/orders-filters';
 import { OrdersPagination } from '@/components/dashboard/order/orders-pagination';
 import { OrdersSelectionProvider } from '@/components/dashboard/order/orders-selection-context';
 import { OrdersTable } from '@/components/dashboard/order/orders-table';
-import { AppChat } from '@/components/dashboard/overview/app-chat';
-import { AppLimits } from '@/components/dashboard/overview/app-limits';
 import { AppUsage } from '@/components/dashboard/overview/app-usage';
-import { Events } from '@/components/dashboard/overview/events';
-import { HelperWidget } from '@/components/dashboard/overview/helper-widget';
-import { Subscriptions } from '@/components/dashboard/overview/subscriptions';
 import { Summary } from '@/components/dashboard/overview/summary';
 
 export const metadata = { title: `Overview | Dashboard | ${config.site.name}` };
@@ -39,7 +28,6 @@ const orders = [
     recipe: 'SAP-SFDC-04',
     status: 'pending',
     priority: 'P0',
-    description: 'This is a test description',
   },
   {
     createdAt: dayjs().subtract(3, 'hour').toDate(),
@@ -57,7 +45,6 @@ const orders = [
     recipe: 'SAP-SFDC-04',
     status: 'canceled',
     priority: 'P2',
-    description: 'This is a test description',
   },
   {
     createdAt: dayjs().subtract(3, 'hour').toDate(),
@@ -66,7 +53,6 @@ const orders = [
     recipe: 'SAP-SFDC-04',
     status: 'rejected',
     priority: 'P3',
-    description: 'This is a test description',
   },
   {
     createdAt: dayjs().subtract(3, 'hour').toDate(),
@@ -75,7 +61,6 @@ const orders = [
     recipe: 'SAP-SFDC-04',
     status: 'completed',
     priority: 'P4',
-    description: 'This is a test description',
   },
 ];
 export default function Page({ searchParams }) {

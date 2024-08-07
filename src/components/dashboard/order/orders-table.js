@@ -2,16 +2,16 @@
 
 import * as React from 'react';
 import RouterLink from 'next/link';
-import Avatar from '@mui/material/Avatar';
+// import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Chip from '@mui/material/Chip';
-import IconButton from '@mui/material/IconButton';
+// import IconButton from '@mui/material/IconButton';
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import { CheckCircle as CheckCircleIcon } from '@phosphor-icons/react/dist/ssr/CheckCircle';
 import { Clock as ClockIcon } from '@phosphor-icons/react/dist/ssr/Clock';
-import { Eye as EyeIcon } from '@phosphor-icons/react/dist/ssr/Eye';
+// import { Eye as EyeIcon } from '@phosphor-icons/react/dist/ssr/Eye';
 import { Minus as MinusIcon } from '@phosphor-icons/react/dist/ssr/Minus';
 import { XCircle as XCircleIcon } from '@phosphor-icons/react/dist/ssr/XCircle';
 
