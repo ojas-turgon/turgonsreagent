@@ -29,7 +29,7 @@ export function AppUsage({ data }) {
           <Stack spacing={3} sx={{ flex: '0 0 auto', justifyContent: 'space-between', width: '240px' }}>
             <Stack spacing={2}>
               <Typography color="success.main" variant="h2">
-                -70%
+                70%
               </Typography>
               <Typography color="text.secondary">
                 decrease in app errors since Turgon AI SRE Agent was deployed
