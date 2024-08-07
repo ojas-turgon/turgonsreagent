@@ -23,7 +23,7 @@ import { z as zod } from 'zod';
 import { paths } from '@/paths';
 import { authClient } from '@/lib/auth/custom/client';
 import { useUser } from '@/hooks/use-user';
-import { DynamicLogo } from '@/components/core/logo';
+// import { DynamicLogo } from '@/components/core/logo';
 import { toast } from '@/components/core/toaster';
 
 const oAuthProviders = [
@@ -73,10 +73,12 @@ export function SignInForm() {
   const onSubmit = React.useCallback(
     async (values) => {
       setIsPending(true);
+
       //##HACK allow all users to sign in
-      defaultValues.email = 'sofia@devias.io';
-      defaultValues.password = 'Secret1';
-      const { error } = await authClient.signInWithPassword(defaultValues);
+      let hackedValues = values;
+      hackedValues.email = 'sofia@devias.io';
+      hackedValues.password = 'Secret1';
+      const { error } = await authClient.signInWithPassword(hackedValues);
 
       if (error) {
         setError('root', { type: 'server', message: error });
