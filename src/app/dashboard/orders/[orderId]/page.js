@@ -54,6 +54,8 @@ export default function Page({ params }) {
         setOrder(data.data);
         if (!data.data.rca) {
           getRCA(data).then((rcaData) => {
+            // eslint-disable-next-line no-console -- Debugging purpose
+            console.error('Got RCA:', rcaData);
             data.data.rca = rcaData.root_cause;
             data.data.rcaproblem = rcaData.problem_statement;
             data.data.rcasymptom = rcaData.symptoms;
