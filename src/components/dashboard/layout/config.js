@@ -7,6 +7,20 @@ export const layoutConfig = {
       title: 'Dashboards',
       items: [
         { key: 'overview', title: 'Overview', href: paths.dashboard.overview, icon: 'house' },
+        { key: 'connections', title: 'Analytics', href: paths.dashboard.analytics, icon: 'chart-pie' },
+        { key: 'runbooks', title: 'E-commerce', href: paths.dashboard.eCommerce, icon: 'cube' },
+      ],
+    },
+  ],
+};
+
+export const origlayoutConfig = {
+  navItems: [
+    {
+      key: 'dashboards',
+      title: 'Dashboards',
+      items: [
+        { key: 'overview', title: 'Overview', href: paths.dashboard.overview, icon: 'house' },
         { key: 'analytics', title: 'Analytics', href: paths.dashboard.analytics, icon: 'chart-pie' },
         { key: 'ecommerce', title: 'E-commerce', href: paths.dashboard.eCommerce, icon: 'cube' },
         { key: 'crypto', title: 'Crypto', href: paths.dashboard.crypto, icon: 'currency-eth' },

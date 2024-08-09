@@ -75,7 +75,9 @@ const events = [
   { id: 'EV-001', createdAt: dayjs().subtract(21, 'hour').toDate(), type: 'order_created' },
 ];
 
-export default function Page() {
+export default function Page({ params }) {
+  const { orderId } = params;
+
   return (
     <Box
       sx={{
@@ -95,7 +97,7 @@ export default function Page() {
             variant="subtitle2"
           >
             <ArrowLeftIcon fontSize="var(--icon-fontSize-md)" />
-            Orders
+            Issues for order {orderId}
           </Link>
         </div>
         <div>

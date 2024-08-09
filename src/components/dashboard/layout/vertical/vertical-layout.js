@@ -4,14 +4,14 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import GlobalStyles from '@mui/material/GlobalStyles';
 
-// import { useSettings } from '@/hooks/use-settings';
+import { useSettings } from '@/hooks/use-settings';
 
-// import { layoutConfig } from '../config';
-// import { MainNav } from './main-nav';
-// import { SideNav } from './side-nav';
+import { layoutConfig } from '../config';
+import { MainNav } from './main-nav';
+import { SideNav } from './side-nav';
 
 export function VerticalLayout({ children }) {
-  // const { settings } = useSettings();
+  const { settings } = useSettings();
 
   return (
     <React.Fragment>
@@ -20,7 +20,7 @@ export function VerticalLayout({ children }) {
           body: {
             '--MainNav-height': '56px',
             '--MainNav-zIndex': 1000,
-            // '--SideNav-width': '280px',
+            '--SideNav-width': '280px',
             '--SideNav-zIndex': 1100,
             '--MobileNav-width': '320px',
             '--MobileNav-zIndex': 1100,
@@ -36,9 +36,9 @@ export function VerticalLayout({ children }) {
           minHeight: '100%',
         }}
       >
-        {/* <SideNav color={settings.navColor} items={layoutConfig.navItems} /> */}
+        <SideNav color={settings.navColor} items={layoutConfig.navItems} />
         <Box sx={{ display: 'flex', flex: '1 1 auto', flexDirection: 'column', pl: { lg: 'var(--SideNav-width)' } }}>
-          {/* <MainNav items={layoutConfig.navItems} /> */}
+          <MainNav items={layoutConfig.navItems} />
           <Box
             component="main"
             sx={{
