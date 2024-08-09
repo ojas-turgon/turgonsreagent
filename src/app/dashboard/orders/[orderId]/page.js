@@ -12,6 +12,7 @@ import CardHeader from '@mui/material/CardHeader';
 import Chip from '@mui/material/Chip';
 import Divider from '@mui/material/Divider';
 import Link from '@mui/material/Link';
+import Skeleton from '@mui/material/Skeleton';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Unstable_Grid2';
@@ -43,6 +44,7 @@ export default function Page({ params }) {
   const { orderId } = params;
 
   const [order, setOrder] = useState(null);
+  const [showSkeleton, setShowSkeleton] = useState(true);
 
   useEffect(() => {
     supabaseClient
@@ -65,6 +67,7 @@ export default function Page({ params }) {
         }
       });
   }, [orderId]);
+  setTimeout(() => setShowSkeleton(false), 2000);
 
   return (
     <Box
@@ -126,26 +129,29 @@ export default function Page({ params }) {
                   title="Root Cause Analysis"
                 />
                 <CardContent>
-                  <Card sx={{ borderRadius: 1 }} variant="outlined">
-                    <PropertyList divider={<Divider />} sx={{ '--PropertyItem-padding': '12px 24px' }}>
-                      {[
-                        {
-                          key: 'Problem Statement',
-                          value: <Typography variant="subtitle2">{order && order.rcaproblem}</Typography>,
-                        },
-                        {
-                          key: 'Symptoms',
-                          value: <Typography variant="subtitle2">{order && order.rcasymptom}</Typography>,
-                        },
-                        {
-                          key: 'Potential Root Causes',
-                          value: <Typography variant="subtitle2">{order && order.rca}</Typography>,
-                        },
-                      ].map((item) => (
-                        <PropertyItem key={item.key} name={item.key} value={item.value} />
-                      ))}
-                    </PropertyList>
-                  </Card>
+                  {showSkeleton && <Skeleton />}
+                  {!showSkeleton && (
+                    <Card sx={{ borderRadius: 1 }} variant="outlined">
+                      <PropertyList divider={<Divider />} sx={{ '--PropertyItem-padding': '12px 24px' }}>
+                        {[
+                          {
+                            key: 'Problem Statement',
+                            value: <Typography variant="subtitle2">{order && order.rcaproblem}</Typography>,
+                          },
+                          {
+                            key: 'Symptoms',
+                            value: <Typography variant="subtitle2">{order && order.rcasymptom}</Typography>,
+                          },
+                          {
+                            key: 'Potential Root Causes',
+                            value: <Typography variant="subtitle2">{order && order.rca}</Typography>,
+                          },
+                        ].map((item) => (
+                          <PropertyItem key={item.key} name={item.key} value={item.value} />
+                        ))}
+                      </PropertyList>
+                    </Card>
+                  )}
                 </CardContent>
               </Card>
               <Card>
@@ -180,7 +186,8 @@ export default function Page({ params }) {
                 title="Remediation"
               />
               <CardContent>
-                <Typography variant="subtitle2">{order && order.remediation}</Typography>
+                {showSkeleton && <Skeleton />}
+                {!showSkeleton && <Typography variant="subtitle2">{order && order.remediation}</Typography>}
               </CardContent>
             </Card>
           </Grid>
