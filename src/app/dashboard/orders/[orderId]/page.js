@@ -34,24 +34,21 @@ const supabaseClient = createClient(supabaseUrl, supabaseKey);
 
 // export const metadata = { title: `Details | Orders | Dashboard | ${config.site.name}` };
 
-function getRCA(data) {
+async function getRCA(data) {
   console.log('asked to get rca');
+  console.log('data', data.data);
   try {
-    fetch(`${process.env.NEXT_PUBLIC_NODE_API_SERVER}/getWorkaktoRCA`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ orderId: data.id }),
-    }).then((response) => {
-      //#TODO set the rca data in supabase, and update the order
-      console.log(response);
+    const response = await fetch(`${process.env.NEXT_PUBLIC_NODE_API_SERVER}/getWorkaktoRCA?id=${data.data.id}`, {
+      method: 'GET',
     });
+    const rcaData = await response.json();
+    console.log('response data', rcaData);
+    return rcaData;
   } catch (error) {
-    console.error(error);
+    console.error('Error fetching RCA:', error);
+    throw error;
   }
 }
-
 export default function Page({ params }) {
   const { orderId } = params;
 
@@ -65,8 +62,15 @@ export default function Page({ params }) {
       .single()
       .then((data) => {
         setOrder(data.data);
-        if (!data.rca) {
-          getRCA(data);
+        if (!data.data.rca) {
+          getRCA(data).then((rcaData) => {
+            data.data.rca = rcaData.root_cause;
+            data.data.rcaproblem = rcaData.problem_statement;
+            data.data.rcasymptom = rcaData.symptoms;
+            data.data.remediation = rcaData.remediation;
+            setOrder(data.data);
+            console.log('data', data);
+          });
         }
       });
   }, [orderId]);
@@ -136,15 +140,15 @@ export default function Page({ params }) {
                       {[
                         {
                           key: 'Problem Statement',
-                          value: <Link variant="subtitle2">{order && order.description}</Link>,
+                          value: <Typography variant="subtitle2">{order && order.rcaproblem}</Typography>,
                         },
                         {
                           key: 'Symptoms',
-                          value: <Typography variant="subtitle2">{order && order.status}</Typography>,
+                          value: <Typography variant="subtitle2">{order && order.rcasymptom}</Typography>,
                         },
                         {
                           key: 'Potential Root Causes',
-                          value: dayjs().subtract(3, 'hour').format('MMMM D, YYYY hh:mm A'),
+                          value: <Typography variant="subtitle2">{order && order.rca}</Typography>,
                         },
                       ].map((item) => (
                         <PropertyItem key={item.key} name={item.key} value={item.value} />
@@ -157,12 +161,20 @@ export default function Page({ params }) {
                 <CardHeader
                   avatar={
                     <Avatar>
-                      <ShoppingCartSimpleIcon fontSize="var(--Icon-fontSize)" />
+                      <TimerIcon fontSize="var(--Icon-fontSize)" />
                     </Avatar>
                   }
-                  title="Remediation"
+                  title="Logs"
                 />
-                <CardContent></CardContent>
+                <CardContent>
+                  {order && (
+                    <Box sx={{ overflowX: 'hidden', overflowY: 'auto', maxHeight: '400px' }}>
+                      <Typography variant="body2" sx={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>
+                        {JSON.stringify(order.errormsg, null, 2)}
+                      </Typography>
+                    </Box>
+                  )}
+                </CardContent>
               </Card>
             </Stack>
           </Grid>
@@ -171,19 +183,13 @@ export default function Page({ params }) {
               <CardHeader
                 avatar={
                   <Avatar>
-                    <TimerIcon fontSize="var(--Icon-fontSize)" />
+                    <ShoppingCartSimpleIcon fontSize="var(--Icon-fontSize)" />
                   </Avatar>
                 }
-                title="Logs"
+                title="Remediation"
               />
               <CardContent>
-                {order && (
-                  <Box sx={{ overflowX: 'hidden', overflowY: 'auto', maxHeight: '400px' }}>
-                    <Typography variant="body2" sx={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>
-                      {JSON.stringify(order.errormsg, null, 2)}
-                    </Typography>
-                  </Box>
-                )}
+                <Typography variant="subtitle2">{order && order.remediation}</Typography>
               </CardContent>
             </Card>
           </Grid>
