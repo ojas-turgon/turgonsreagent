@@ -88,11 +88,11 @@ export function SideNav() {
           ))}
         </Stack>
         <Stack direction="row" spacing={2} sx={{ alignItems: 'center' }}>
-          <Avatar src="/assets/avatar.png">AV</Avatar>
+          <Avatar src="/assets/headshhot_varma_color.png">AV</Avatar>
           <div>
-            <Typography variant="subtitle1">Sofia Rivers</Typography>
+            <Typography variant="subtitle1">Ankur Varma</Typography>
             <Typography color="text.secondary" variant="caption">
-              sofia@devias.io
+              ankur@turgon.io
             </Typography>
           </div>
         </Stack>

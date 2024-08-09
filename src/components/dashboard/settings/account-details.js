@@ -71,7 +71,7 @@ export function AccountDetails() {
                     </Typography>
                   </Stack>
                 </Box>
-                <Avatar src="/assets/avatar.png" sx={{ '--Avatar-size': '100px' }} />
+                <Avatar src="/assets/headshhot_varma_color.png" sx={{ '--Avatar-size': '100px' }} />
               </Box>
             </Box>
             <Button color="secondary" size="small">
@@ -81,11 +81,11 @@ export function AccountDetails() {
           <Stack spacing={2}>
             <FormControl>
               <InputLabel>Full name</InputLabel>
-              <OutlinedInput defaultValue="Sofia Rivers" name="fullName" />
+              <OutlinedInput defaultValue="Ankur Varma" name="fullName" />
             </FormControl>
             <FormControl disabled>
               <InputLabel>Email address</InputLabel>
-              <OutlinedInput name="email" type="email" value="sofia@devias.io" />
+              <OutlinedInput name="email" type="email" value="ankur@turgon.io" />
               <FormHelperText>
                 Please <Link variant="inherit">contact us</Link> to change your email
               </FormHelperText>
@@ -98,7 +98,7 @@ export function AccountDetails() {
                   startAdornment={
                     <InputAdornment position="start">
                       <Box
-                        alt="Spain"
+                        alt="US"
                         component="img"
                         src="/assets/flag-es.svg"
                         sx={{ display: 'block', height: '20px', width: 'auto' }}
