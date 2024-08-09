@@ -1,6 +1,6 @@
 {
   "functions": {
-    "dashboard/orders/[orderId]": {
+    "src/app/dashboard/orders/[orderId]/page.js": {
       "maxDuration": 60,
       "memory": 3009
     }
