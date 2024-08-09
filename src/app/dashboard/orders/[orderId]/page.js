@@ -22,9 +22,7 @@ import { Radical as CreditCardIcon } from '@phosphor-icons/react/dist/ssr/Radica
 import { Timer as TimerIcon } from '@phosphor-icons/react/dist/ssr/Timer';
 import { createClient } from '@supabase/supabase-js';
 
-import { config } from '@/config';
 import { paths } from '@/paths';
-import { dayjs } from '@/lib/dayjs';
 import { PropertyItem } from '@/components/core/property-item';
 import { PropertyList } from '@/components/core/property-list';
 
@@ -35,19 +33,11 @@ const supabaseClient = createClient(supabaseUrl, supabaseKey);
 // export const metadata = { title: `Details | Orders | Dashboard | ${config.site.name}` };
 
 async function getRCA(data) {
-  console.log('asked to get rca');
-  console.log('data', data.data);
-  try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_NODE_API_SERVER}/getWorkaktoRCA?id=${data.data.id}`, {
-      method: 'GET',
-    });
-    const rcaData = await response.json();
-    console.log('response data', rcaData);
-    return rcaData;
-  } catch (error) {
-    console.error('Error fetching RCA:', error);
-    throw error;
-  }
+  const response = await fetch(`${process.env.NEXT_PUBLIC_NODE_API_SERVER}/getWorkaktoRCA?id=${data.data.id}`, {
+    method: 'GET',
+  });
+  const rcaData = await response.json();
+  return rcaData;
 }
 export default function Page({ params }) {
   const { orderId } = params;
@@ -69,7 +59,6 @@ export default function Page({ params }) {
             data.data.rcasymptom = rcaData.symptoms;
             data.data.remediation = rcaData.remediation;
             setOrder(data.data);
-            console.log('data', data);
           });
         }
       });

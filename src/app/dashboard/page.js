@@ -13,8 +13,6 @@ import { Users as UsersIcon } from '@phosphor-icons/react/dist/ssr/Users';
 import { Warning as WarningIcon } from '@phosphor-icons/react/dist/ssr/Warning';
 import { createClient } from '@supabase/supabase-js';
 
-import { config } from '@/config';
-import { dayjs } from '@/lib/dayjs';
 import { OrderModal } from '@/components/dashboard/order/order-modal';
 import { OrdersFilters } from '@/components/dashboard/order/orders-filters';
 import { OrdersPagination } from '@/components/dashboard/order/orders-pagination';
@@ -78,23 +76,23 @@ export default function Page({ searchParams }) {
   // const sortedOrders = applySort(issues, sortDir);
   // const filteredOrders = applyFilters(issues, { customer, id, status });
 
-  const sortedOrders = issues;
+  // const sortedOrders = issues;
   const filteredOrders = issues;
 
   useEffect(() => {
     const getIssues = async () => {
       try {
-        console.log('fetching issues');
         const { data: fetchedIssues, error } = await supabaseClient.from('workatosre').select('*');
 
         if (error) {
+          // eslint-disable-next-line no-console -- Debugging purpose
           console.error('Error fetching issues:', error);
           return;
         }
-        console.log('fetched issues', fetchedIssues);
 
         setIssues(fetchedIssues);
       } catch (error) {
+        // eslint-disable-next-line no-console -- Debugging purpose
         console.error('Error fetching issues:', error);
       }
     };
@@ -182,36 +180,36 @@ export default function Page({ searchParams }) {
 
 // Sorting and filtering has to be done on the server.
 
-function applySort(row, sortDir) {
-  return row.sort((a, b) => {
-    if (sortDir === 'asc') {
-      return a.createdAt.getTime() - b.createdAt.getTime();
-    }
+// function applySort(row, sortDir) {
+//   return row.sort((a, b) => {
+//     if (sortDir === 'asc') {
+//       return a.createdAt.getTime() - b.createdAt.getTime();
+//     }
 
-    return b.createdAt.getTime() - a.createdAt.getTime();
-  });
-}
+//     return b.createdAt.getTime() - a.createdAt.getTime();
+//   });
+// }
 
-function applyFilters(row, { customer, id, status }) {
-  return row.filter((item) => {
-    if (customer) {
-      if (!item.customer?.name?.toLowerCase().includes(customer.toLowerCase())) {
-        return false;
-      }
-    }
+// function applyFilters(row, { customer, id, status }) {
+//   return row.filter((item) => {
+//     if (customer) {
+//       if (!item.customer?.name?.toLowerCase().includes(customer.toLowerCase())) {
+//         return false;
+//       }
+//     }
 
-    if (id) {
-      if (!item.id?.toLowerCase().includes(id.toLowerCase())) {
-        return false;
-      }
-    }
+//     if (id) {
+//       if (!item.id?.toLowerCase().includes(id.toLowerCase())) {
+//         return false;
+//       }
+//     }
 
-    if (status) {
-      if (item.status !== status) {
-        return false;
-      }
-    }
+//     if (status) {
+//       if (item.status !== status) {
+//         return false;
+//       }
+//     }
 
-    return true;
-  });
-}
+//     return true;
+//   });
+// }
