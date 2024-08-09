@@ -21,11 +21,11 @@ import { useOrdersSelection } from './orders-selection-context';
 
 // The tabs should be generated using API data.
 const tabs = [
-  { label: 'All', value: '', count: 5 },
-  { label: 'Completed', value: 'completed', count: 2 },
-  { label: 'Pending', value: 'pending', count: 1 },
-  { label: 'Canceled', value: 'canceled', count: 1 },
-  { label: 'Rejected', value: 'rejected', count: 1 },
+  { label: 'All', value: '', count: 104 },
+  { label: 'New', value: 'New', count: 32 },
+  { label: 'Verified', value: 'Verified', count: 36 },
+  { label: 'In Progress', value: 'In Progress', count: 37 },
+  { label: 'Fixed', value: 'Fixed', count: 38 },
 ];
 
 export function OrdersFilters({ filters = {}, sortDir = 'desc' }) {
@@ -55,7 +55,7 @@ export function OrdersFilters({ filters = {}, sortDir = 'desc' }) {
         searchParams.set('customer', newFilters.customer);
       }
 
-      router.push(`${paths.dashboard.orders.list}?${searchParams.toString()}`);
+      router.push(`${paths.dashboard.overview}?${searchParams.toString()}`);
     },
     [router]
   );
@@ -114,7 +114,7 @@ export function OrdersFilters({ filters = {}, sortDir = 'desc' }) {
         <Stack direction="row" spacing={2} sx={{ alignItems: 'center', flex: '1 1 auto', flexWrap: 'wrap' }}>
           <FilterButton
             displayValue={id}
-            label="Order ID"
+            label="Issue ID"
             onFilterApply={(value) => {
               handleIdChange(value);
             }}
@@ -126,7 +126,7 @@ export function OrdersFilters({ filters = {}, sortDir = 'desc' }) {
           />
           <FilterButton
             displayValue={customer}
-            label="Customer"
+            label="Priority"
             onFilterApply={(value) => {
               handleCustomerChange(value);
             }}

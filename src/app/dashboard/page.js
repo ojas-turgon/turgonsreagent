@@ -73,11 +73,11 @@ export default function Page({ searchParams }) {
   const { customer, id, previewId, sortDir, status } = searchParams;
   const [issues, setIssues] = useState([]);
 
-  // const sortedOrders = applySort(issues, sortDir);
-  // const filteredOrders = applyFilters(issues, { customer, id, status });
-
+  const sortedOrders = applySort(issues, sortDir);
+  const filteredOrders = applyFilters(issues, { customer, id, status });
+  console.log('sortedOrders', issues);
   // const sortedOrders = issues;
-  const filteredOrders = issues;
+  // const filteredOrders = sortedOrders;
 
   useEffect(() => {
     const getIssues = async () => {
@@ -180,36 +180,39 @@ export default function Page({ searchParams }) {
 
 // Sorting and filtering has to be done on the server.
 
-// function applySort(row, sortDir) {
-//   return row.sort((a, b) => {
-//     if (sortDir === 'asc') {
-//       return a.createdAt.getTime() - b.createdAt.getTime();
-//     }
+function applySort(row, sortDir) {
+  return row.sort((a, b) => {
+    // Convert Supabase timestamptz to JavaScript Date object
+    const dateA = new Date(a.createdAt);
+    const dateB = new Date(b.createdAt);
+    if (sortDir === 'asc') {
+      return dateA.getTime() - dateB.getTime();
+    }
 
-//     return b.createdAt.getTime() - a.createdAt.getTime();
-//   });
-// }
+    return dateB.getTime() - dateA.getTime();
+  });
+}
 
-// function applyFilters(row, { customer, id, status }) {
-//   return row.filter((item) => {
-//     if (customer) {
-//       if (!item.customer?.name?.toLowerCase().includes(customer.toLowerCase())) {
-//         return false;
-//       }
-//     }
+function applyFilters(row, { customer, id, status }) {
+  return row.filter((item) => {
+    if (customer) {
+      if (!item.priority?.toLowerCase().includes(customer.toLowerCase())) {
+        return false;
+      }
+    }
 
-//     if (id) {
-//       if (!item.id?.toLowerCase().includes(id.toLowerCase())) {
-//         return false;
-//       }
-//     }
+    if (id) {
+      if (item.id != id) {
+        return false;
+      }
+    }
 
-//     if (status) {
-//       if (item.status !== status) {
-//         return false;
-//       }
-//     }
+    if (status) {
+      if (item.status !== status) {
+        return false;
+      }
+    }
 
-//     return true;
-//   });
-// }
+    return true;
+  });
+}
