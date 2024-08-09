@@ -166,12 +166,11 @@ function LanguageSwitch() {
     </React.Fragment>
   );
 }
-
 const user = {
   id: 'USR-000',
-  name: 'Sofia Rivers',
-  avatar: '/assets/avatar.png',
-  email: 'sofia@devias.io',
+  name: 'Ankur Varma',
+  avatar: '/assets/headshhot_varma_color.png',
+  email: 'ankur@tugon.ai',
 };
 
 function UserButton() {

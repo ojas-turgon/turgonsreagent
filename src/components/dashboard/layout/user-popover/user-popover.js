@@ -25,9 +25,9 @@ import { SupabaseSignOut } from './supabase-sign-out';
 
 const user = {
   id: 'USR-000',
-  name: 'Sofia Rivers',
-  avatar: '/assets/avatar.png',
-  email: 'sofia@devias.io',
+  name: 'Ankur Varma',
+  avatar: '/assets/headshhot_varma_color.png',
+  email: 'ankur@tugon.ai',
 };
 
 export function UserPopover({ anchorEl, onClose, open }) {
@@ -41,9 +41,9 @@ export function UserPopover({ anchorEl, onClose, open }) {
       transformOrigin={{ horizontal: 'right', vertical: 'top' }}
     >
       <Box sx={{ p: 2 }}>
-        <Typography>Ankur Varma</Typography>
+        <Typography>{user.name}</Typography>
         <Typography color="text.secondary" variant="body2">
-          ankur@tugon.ai
+          {user.email}
         </Typography>
       </Box>
       <Divider />
