@@ -1,4 +1,7 @@
+'use client';
+
 import * as React from 'react';
+import { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import Divider from '@mui/material/Divider';
@@ -8,6 +11,7 @@ import Grid from '@mui/material/Unstable_Grid2';
 import { ListChecks as ListChecksIcon } from '@phosphor-icons/react/dist/ssr/ListChecks';
 import { Users as UsersIcon } from '@phosphor-icons/react/dist/ssr/Users';
 import { Warning as WarningIcon } from '@phosphor-icons/react/dist/ssr/Warning';
+import { createClient } from '@supabase/supabase-js';
 
 import { config } from '@/config';
 import { dayjs } from '@/lib/dayjs';
@@ -19,55 +23,84 @@ import { OrdersTable } from '@/components/dashboard/order/orders-table';
 import { AppUsage } from '@/components/dashboard/overview/app-usage';
 import { Summary } from '@/components/dashboard/overview/summary';
 
-export const metadata = { title: `Overview | Dashboard | ${config.site.name}` };
-const orders = [
-  {
-    createdAt: dayjs().subtract(3, 'hour').toDate(),
-    id: 'ORD-005',
-    category: 'validation',
-    recipe: 'SAP-SFDC-04',
-    status: 'pending',
-    priority: 'P0',
-  },
-  {
-    createdAt: dayjs().subtract(3, 'hour').toDate(),
-    id: 'ORD-004',
-    category: 'validation',
-    recipe: 'SAP-SFDC-04',
-    status: 'completed',
-    priority: 'P1',
-    description: 'This is a test description',
-  },
-  {
-    createdAt: dayjs().subtract(3, 'hour').toDate(),
-    id: 'ORD-003',
-    category: 'validation',
-    recipe: 'SAP-SFDC-04',
-    status: 'canceled',
-    priority: 'P2',
-  },
-  {
-    createdAt: dayjs().subtract(3, 'hour').toDate(),
-    id: 'ORD-002',
-    category: 'validation',
-    recipe: 'SAP-SFDC-04',
-    status: 'rejected',
-    priority: 'P3',
-  },
-  {
-    createdAt: dayjs().subtract(3, 'hour').toDate(),
-    id: 'ORD-001',
-    category: 'validation',
-    recipe: 'SAP-SFDC-04',
-    status: 'completed',
-    priority: 'P4',
-  },
-];
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+const supabaseClient = createClient(supabaseUrl, supabaseKey);
+
+// export const metadata = { title: `Overview | Dashboard | ${config.site.name}` };
+// const orders = [
+//   {
+//     createdAt: dayjs().subtract(3, 'hour').toDate(),
+//     id: 'ORD-005',
+//     category: 'validation',
+//     recipe: 'SAP-SFDC-04',
+//     status: 'pending',
+//     priority: 'P0',
+//   },
+//   {
+//     createdAt: dayjs().subtract(3, 'hour').toDate(),
+//     id: 'ORD-004',
+//     category: 'validation',
+//     recipe: 'SAP-SFDC-04',
+//     status: 'completed',
+//     priority: 'P1',
+//     description: 'This is a test description',
+//   },
+//   {
+//     createdAt: dayjs().subtract(3, 'hour').toDate(),
+//     id: 'ORD-003',
+//     category: 'validation',
+//     recipe: 'SAP-SFDC-04',
+//     status: 'canceled',
+//     priority: 'P2',
+//   },
+//   {
+//     createdAt: dayjs().subtract(3, 'hour').toDate(),
+//     id: 'ORD-002',
+//     category: 'validation',
+//     recipe: 'SAP-SFDC-04',
+//     status: 'rejected',
+//     priority: 'P3',
+//   },
+//   {
+//     createdAt: dayjs().subtract(3, 'hour').toDate(),
+//     id: 'ORD-001',
+//     category: 'validation',
+//     recipe: 'SAP-SFDC-04',
+//     status: 'completed',
+//     priority: 'P4',
+//   },
+// ];
 export default function Page({ searchParams }) {
   const { customer, id, previewId, sortDir, status } = searchParams;
+  const [issues, setIssues] = useState([]);
 
-  const sortedOrders = applySort(orders, sortDir);
-  const filteredOrders = applyFilters(sortedOrders, { customer, id, status });
+  // const sortedOrders = applySort(issues, sortDir);
+  // const filteredOrders = applyFilters(issues, { customer, id, status });
+
+  const sortedOrders = issues;
+  const filteredOrders = issues;
+
+  useEffect(() => {
+    const getIssues = async () => {
+      try {
+        console.log('fetching issues');
+        const { data: fetchedIssues, error } = await supabaseClient.from('workatosre').select('*');
+
+        if (error) {
+          console.error('Error fetching issues:', error);
+          return;
+        }
+        console.log('fetched issues', fetchedIssues);
+
+        setIssues(fetchedIssues);
+      } catch (error) {
+        console.error('Error fetching issues:', error);
+      }
+    };
+
+    getIssues();
+  }, []);
 
   return (
     <Box

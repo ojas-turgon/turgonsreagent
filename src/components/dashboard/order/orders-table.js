@@ -50,11 +50,11 @@ const columns = [
             <Link
               color="text.primary"
               component={RouterLink}
-              href={paths.dashboard.orders.details('1')}
+              href={paths.dashboard.orders.details(row.id)}
               sx={{ cursor: 'pointer' }}
               variant="subtitle2"
             >
-              {row.id}
+              {row.issueid}
             </Link>
             {/* <Typography color="text.secondary" variant="body2">
             {row.lineItems} products •{' '}
@@ -81,13 +81,19 @@ const columns = [
   {
     formatter: (row) => {
       const mapping = {
-        pending: { label: 'Pending', icon: <ClockIcon color="var(--mui-palette-warning-main)" weight="fill" /> },
-        completed: {
-          label: 'Completed',
+        'In Progress': {
+          label: 'In Progress',
+          icon: <ClockIcon color="var(--mui-palette-warning-main)" weight="fill" />,
+        },
+        New: {
+          label: 'New',
+          icon: <MinusIcon color="var(--mui-palette-error-main)" weight="fill" />,
+        },
+        Fixed: { label: 'Fixed', icon: <CheckCircleIcon color="var(--mui-palette-success-main)" /> },
+        Verified: {
+          label: 'Verified',
           icon: <CheckCircleIcon color="var(--mui-palette-success-main)" weight="fill" />,
         },
-        canceled: { label: 'Canceled', icon: <XCircleIcon color="var(--mui-palette-error-main)" weight="fill" /> },
-        rejected: { label: 'Rejected', icon: <MinusIcon color="var(--mui-palette-error-main)" /> },
       };
       const { label, icon } = mapping[row.status] ?? { label: 'Unknown', icon: null };
 

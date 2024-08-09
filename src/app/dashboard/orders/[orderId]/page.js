@@ -1,4 +1,7 @@
+'use client';
+
 import * as React from 'react';
+import { useEffect, useState } from 'react';
 import RouterLink from 'next/link';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
@@ -6,6 +9,7 @@ import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';
+import Chip from '@mui/material/Chip';
 import Divider from '@mui/material/Divider';
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
@@ -16,6 +20,7 @@ import { CaretDown as CaretDownIcon } from '@phosphor-icons/react/dist/ssr/Caret
 import { FirstAid as ShoppingCartSimpleIcon } from '@phosphor-icons/react/dist/ssr/FirstAid';
 import { Radical as CreditCardIcon } from '@phosphor-icons/react/dist/ssr/Radical';
 import { Timer as TimerIcon } from '@phosphor-icons/react/dist/ssr/Timer';
+import { createClient } from '@supabase/supabase-js';
 
 import { config } from '@/config';
 import { paths } from '@/paths';
@@ -23,10 +28,48 @@ import { dayjs } from '@/lib/dayjs';
 import { PropertyItem } from '@/components/core/property-item';
 import { PropertyList } from '@/components/core/property-list';
 
-export const metadata = { title: `Details | Orders | Dashboard | ${config.site.name}` };
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+const supabaseClient = createClient(supabaseUrl, supabaseKey);
+
+// export const metadata = { title: `Details | Orders | Dashboard | ${config.site.name}` };
+
+function getRCA(data) {
+  console.log('asked to get rca');
+  try {
+    fetch(`${process.env.NEXT_PUBLIC_NODE_API_SERVER}/getWorkaktoRCA`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ orderId: data.id }),
+    }).then((response) => {
+      //#TODO set the rca data in supabase, and update the order
+      console.log(response);
+    });
+  } catch (error) {
+    console.error(error);
+  }
+}
 
 export default function Page({ params }) {
   const { orderId } = params;
+
+  const [order, setOrder] = useState(null);
+
+  useEffect(() => {
+    supabaseClient
+      .from('workatosre')
+      .select('*')
+      .eq('id', orderId)
+      .single()
+      .then((data) => {
+        setOrder(data.data);
+        if (!data.rca) {
+          getRCA(data);
+        }
+      });
+  }, [orderId]);
 
   return (
     <Box
@@ -53,7 +96,14 @@ export default function Page({ params }) {
         <div>
           <Stack direction={{ xs: 'column', sm: 'row' }} spacing={3} sx={{ alignItems: 'flex-start' }}>
             <Box sx={{ flex: '1 1 auto' }}>
-              <Typography variant="h5">ORD-001 ({orderId})</Typography>
+              <Typography variant="h5" sx={{ mb: 2 }}>
+                ORD-001 ({orderId})
+              </Typography>
+              <Stack direction="row" spacing={1}>
+                <Chip label={order && order.status} color="primary" />
+                <Chip label={order && order.recipe} color="warning" />
+                <Chip label={order && order.category} color="success" />
+              </Stack>
             </Box>
             <div>
               <Button endIcon={<CaretDownIcon />} variant="contained">
@@ -62,6 +112,7 @@ export default function Page({ params }) {
             </div>
           </Stack>
         </div>
+
         <Grid container spacing={4}>
           <Grid md={6} xs={12}>
             <Stack spacing={4}>
@@ -83,18 +134,13 @@ export default function Page({ params }) {
                   <Card sx={{ borderRadius: 1 }} variant="outlined">
                     <PropertyList divider={<Divider />} sx={{ '--PropertyItem-padding': '12px 24px' }}>
                       {[
-                        { key: 'Problem Statement', value: <Link variant="subtitle2">Miron Vitold</Link> },
+                        {
+                          key: 'Problem Statement',
+                          value: <Link variant="subtitle2">{order && order.description}</Link>,
+                        },
                         {
                           key: 'Symptoms',
-                          value: (
-                            <Typography variant="subtitle2">
-                              1721 Bartlett Avenue
-                              <br />
-                              Southfield, Michigan, United States
-                              <br />
-                              48034
-                            </Typography>
-                          ),
+                          value: <Typography variant="subtitle2">{order && order.status}</Typography>,
                         },
                         {
                           key: 'Potential Root Causes',
@@ -130,7 +176,15 @@ export default function Page({ params }) {
                 }
                 title="Logs"
               />
-              <CardContent></CardContent>
+              <CardContent>
+                {order && (
+                  <Box sx={{ overflowX: 'hidden', overflowY: 'auto', maxHeight: '400px' }}>
+                    <Typography variant="body2" sx={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>
+                      {JSON.stringify(order.errormsg, null, 2)}
+                    </Typography>
+                  </Box>
+                )}
+              </CardContent>
             </Card>
           </Grid>
         </Grid>
