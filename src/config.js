@@ -4,7 +4,7 @@ import { LogLevel } from '@/lib/logger';
 
 export const config = {
   site: {
-    name: 'Devias Kit Pro',
+    name: 'Turgon AI Workato SRE Agent',
     description: '',
     colorScheme: 'light',
     themeColor: '#090a0b',

@@ -7,8 +7,8 @@ export const layoutConfig = {
       title: 'Dashboards',
       items: [
         { key: 'overview', title: 'Overview', href: paths.dashboard.overview, icon: 'house' },
-        { key: 'connections', title: 'Analytics', href: paths.dashboard.analytics, icon: 'chart-pie' },
-        { key: 'runbooks', title: 'E-commerce', href: paths.dashboard.eCommerce, icon: 'cube' },
+        { key: 'connections', title: 'Connections', href: paths.dashboard, icon: 'chart-pie' },
+        { key: 'runbooks', title: 'RunBooks', href: paths.dashboard, icon: 'cube' },
       ],
     },
   ],

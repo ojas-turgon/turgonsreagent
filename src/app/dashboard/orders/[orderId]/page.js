@@ -15,9 +15,9 @@ import Grid from '@mui/material/Unstable_Grid2';
 import { ArrowLeft as ArrowLeftIcon } from '@phosphor-icons/react/dist/ssr/ArrowLeft';
 import { CaretDown as CaretDownIcon } from '@phosphor-icons/react/dist/ssr/CaretDown';
 import { CheckCircle as CheckCircleIcon } from '@phosphor-icons/react/dist/ssr/CheckCircle';
-import { CreditCard as CreditCardIcon } from '@phosphor-icons/react/dist/ssr/CreditCard';
+import { FirstAid as ShoppingCartSimpleIcon } from '@phosphor-icons/react/dist/ssr/FirstAid';
 import { PencilSimple as PencilSimpleIcon } from '@phosphor-icons/react/dist/ssr/PencilSimple';
-import { ShoppingCartSimple as ShoppingCartSimpleIcon } from '@phosphor-icons/react/dist/ssr/ShoppingCartSimple';
+import { Radical as CreditCardIcon } from '@phosphor-icons/react/dist/ssr/Radical';
 import { Timer as TimerIcon } from '@phosphor-icons/react/dist/ssr/Timer';
 
 import { config } from '@/config';
@@ -92,12 +92,12 @@ export default function Page({ params }) {
           <Link
             color="text.primary"
             component={RouterLink}
-            href={paths.dashboard.orders.list}
+            href={paths.dashboard.overview}
             sx={{ alignItems: 'center', display: 'inline-flex', gap: 1 }}
             variant="subtitle2"
           >
             <ArrowLeftIcon fontSize="var(--icon-fontSize-md)" />
-            Issues for order {orderId}
+            Back to Dashboard
           </Link>
         </div>
         <div>
@@ -113,29 +113,29 @@ export default function Page({ params }) {
           </Stack>
         </div>
         <Grid container spacing={4}>
-          <Grid md={8} xs={12}>
+          <Grid md={6} xs={12}>
             <Stack spacing={4}>
               <Card>
                 <CardHeader
-                  action={
-                    <Button color="secondary" startIcon={<PencilSimpleIcon />}>
-                      Edit
-                    </Button>
-                  }
+                  // action={
+                  //   // <Button color="secondary" startIcon={<PencilSimpleIcon />}>
+                  //   //   Edit
+                  //   // </Button>
+                  // }
                   avatar={
                     <Avatar>
                       <CreditCardIcon fontSize="var(--Icon-fontSize)" />
                     </Avatar>
                   }
-                  title="Order information"
+                  title="Root Cause Analysis"
                 />
                 <CardContent>
                   <Card sx={{ borderRadius: 1 }} variant="outlined">
                     <PropertyList divider={<Divider />} sx={{ '--PropertyItem-padding': '12px 24px' }}>
                       {[
-                        { key: 'Customer', value: <Link variant="subtitle2">Miron Vitold</Link> },
+                        { key: 'Problem Statement', value: <Link variant="subtitle2">Miron Vitold</Link> },
                         {
-                          key: 'Address',
+                          key: 'Symptoms',
                           value: (
                             <Typography variant="subtitle2">
                               1721 Bartlett Avenue
@@ -146,42 +146,9 @@ export default function Page({ params }) {
                             </Typography>
                           ),
                         },
-                        { key: 'Date', value: dayjs().subtract(3, 'hour').format('MMMM D, YYYY hh:mm A') },
                         {
-                          key: 'Status',
-                          value: (
-                            <Chip
-                              icon={<CheckCircleIcon color="var(--mui-palette-success-main)" weight="fill" />}
-                              label="Completed"
-                              size="small"
-                              variant="outlined"
-                            />
-                          ),
-                        },
-                        {
-                          key: 'Payment method',
-                          value: (
-                            <Stack direction="row" spacing={2} sx={{ alignItems: 'center' }}>
-                              <Avatar
-                                sx={{
-                                  bgcolor: 'var(--mui-palette-background-paper)',
-                                  boxShadow: 'var(--mui-shadows-8)',
-                                }}
-                              >
-                                <Box
-                                  component="img"
-                                  src="/assets/payment-method-1.png"
-                                  sx={{ borderRadius: '50px', height: 'auto', width: '35px' }}
-                                />
-                              </Avatar>
-                              <div>
-                                <Typography variant="body2">Mastercard</Typography>
-                                <Typography color="text.secondary" variant="body2">
-                                  **** 4242
-                                </Typography>
-                              </div>
-                            </Stack>
-                          ),
+                          key: 'Potential Root Causes',
+                          value: dayjs().subtract(3, 'hour').format('MMMM D, YYYY hh:mm A'),
                         },
                       ].map((item) => (
                         <PropertyItem key={item.key} name={item.key} value={item.value} />
@@ -197,53 +164,13 @@ export default function Page({ params }) {
                       <ShoppingCartSimpleIcon fontSize="var(--Icon-fontSize)" />
                     </Avatar>
                   }
-                  title="Checkout Summary"
+                  title="Remediation"
                 />
-                <CardContent>
-                  <Stack spacing={2}>
-                    <Card sx={{ borderRadius: 1 }} variant="outlined">
-                      <Box sx={{ overflowX: 'auto' }}>
-                        <LineItemsTable rows={lineItems} />
-                      </Box>
-                    </Card>
-                    <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-                      <Stack spacing={2} sx={{ width: '300px', maxWidth: '100%' }}>
-                        <Stack direction="row" spacing={3} sx={{ justifyContent: 'space-between' }}>
-                          <Typography variant="body2">Subtotal</Typography>
-                          <Typography variant="body2">
-                            {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(59)}
-                          </Typography>
-                        </Stack>
-                        <Stack direction="row" spacing={3} sx={{ justifyContent: 'space-between' }}>
-                          <Typography variant="body2">Discount</Typography>
-                          <Typography variant="body2">-</Typography>
-                        </Stack>
-                        <Stack direction="row" spacing={3} sx={{ justifyContent: 'space-between' }}>
-                          <Typography variant="body2">Shipping</Typography>
-                          <Typography variant="body2">
-                            {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(20)}
-                          </Typography>
-                        </Stack>
-                        <Stack direction="row" spacing={3} sx={{ justifyContent: 'space-between' }}>
-                          <Typography variant="body2">Taxes</Typography>
-                          <Typography variant="body2">
-                            {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(15.01)}
-                          </Typography>
-                        </Stack>
-                        <Stack direction="row" spacing={3} sx={{ justifyContent: 'space-between' }}>
-                          <Typography variant="subtitle1">Total</Typography>
-                          <Typography variant="subtitle1">
-                            {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(94.01)}
-                          </Typography>
-                        </Stack>
-                      </Stack>
-                    </Box>
-                  </Stack>
-                </CardContent>
+                <CardContent></CardContent>
               </Card>
             </Stack>
           </Grid>
-          <Grid md={4} xs={12}>
+          <Grid md={6} xs={12}>
             <Card>
               <CardHeader
                 avatar={
@@ -251,11 +178,9 @@ export default function Page({ params }) {
                     <TimerIcon fontSize="var(--Icon-fontSize)" />
                   </Avatar>
                 }
-                title="Timeline"
+                title="Logs"
               />
-              <CardContent>
-                <EventsTimeline events={events} />
-              </CardContent>
+              <CardContent></CardContent>
             </Card>
           </Grid>
         </Grid>
