@@ -1,3 +1,4 @@
+import React from 'react'; // Add this line
 import Skeleton from '@mui/material/Skeleton';
 import Stack from '@mui/material/Stack';
 
