@@ -50,7 +50,7 @@ const columns = [
             <Link
               color="text.primary"
               component={RouterLink}
-              href={paths.dashboard.orders.preview('1')}
+              href={paths.dashboard.orders.details('1')}
               sx={{ cursor: 'pointer' }}
               variant="subtitle2"
             >
