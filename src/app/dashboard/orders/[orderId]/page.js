@@ -6,7 +6,6 @@ import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';
-import Chip from '@mui/material/Chip';
 import Divider from '@mui/material/Divider';
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
@@ -14,9 +13,7 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Unstable_Grid2';
 import { ArrowLeft as ArrowLeftIcon } from '@phosphor-icons/react/dist/ssr/ArrowLeft';
 import { CaretDown as CaretDownIcon } from '@phosphor-icons/react/dist/ssr/CaretDown';
-import { CheckCircle as CheckCircleIcon } from '@phosphor-icons/react/dist/ssr/CheckCircle';
 import { FirstAid as ShoppingCartSimpleIcon } from '@phosphor-icons/react/dist/ssr/FirstAid';
-import { PencilSimple as PencilSimpleIcon } from '@phosphor-icons/react/dist/ssr/PencilSimple';
 import { Radical as CreditCardIcon } from '@phosphor-icons/react/dist/ssr/Radical';
 import { Timer as TimerIcon } from '@phosphor-icons/react/dist/ssr/Timer';
 
@@ -25,55 +22,8 @@ import { paths } from '@/paths';
 import { dayjs } from '@/lib/dayjs';
 import { PropertyItem } from '@/components/core/property-item';
 import { PropertyList } from '@/components/core/property-list';
-import { EventsTimeline } from '@/components/dashboard/order/events-timeline';
-import { LineItemsTable } from '@/components/dashboard/order/line-items-table';
 
 export const metadata = { title: `Details | Orders | Dashboard | ${config.site.name}` };
-
-const lineItems = [
-  {
-    id: 'LI-001',
-    product: 'Erbology Aloe Vera',
-    image: '/assets/product-1.png',
-    quantity: 1,
-    currency: 'USD',
-    unitAmount: 24,
-    totalAmount: 24,
-  },
-  {
-    id: 'LI-002',
-    product: 'Lancome Rouge',
-    image: '/assets/product-2.png',
-    quantity: 1,
-    currency: 'USD',
-    unitAmount: 35,
-    totalAmount: 35,
-  },
-];
-
-const events = [
-  {
-    id: 'EV-004',
-    createdAt: dayjs().subtract(3, 'hour').toDate(),
-    type: 'note_added',
-    author: { name: 'Fran Perez', avatar: '/assets/avatar-5.png' },
-    note: 'Customer states that the products have been damaged by the courier.',
-  },
-  {
-    id: 'EV-003',
-    createdAt: dayjs().subtract(12, 'hour').toDate(),
-    type: 'shipment_notice',
-    description: 'Left the package in front of the door',
-  },
-  {
-    id: 'EV-002',
-    createdAt: dayjs().subtract(18, 'hour').toDate(),
-    type: 'items_shipped',
-    carrier: 'USPS',
-    trackingNumber: '940011189',
-  },
-  { id: 'EV-001', createdAt: dayjs().subtract(21, 'hour').toDate(), type: 'order_created' },
-];
 
 export default function Page({ params }) {
   const { orderId } = params;
@@ -103,7 +53,7 @@ export default function Page({ params }) {
         <div>
           <Stack direction={{ xs: 'column', sm: 'row' }} spacing={3} sx={{ alignItems: 'flex-start' }}>
             <Box sx={{ flex: '1 1 auto' }}>
-              <Typography variant="h5">ORD-001</Typography>
+              <Typography variant="h5">ORD-001 ({orderId})</Typography>
             </Box>
             <div>
               <Button endIcon={<CaretDownIcon />} variant="contained">
