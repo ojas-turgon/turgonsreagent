@@ -73,11 +73,8 @@ export default function Page({ searchParams }) {
   const { customer, id, previewId, sortDir, status } = searchParams;
   const [issues, setIssues] = useState([]);
 
-  const sortedOrders = applySort(issues, sortDir);
+  // const sortedOrders = applySort(issues, sortDir);
   const filteredOrders = applyFilters(issues, { customer, id, status });
-  console.log('sortedOrders', issues);
-  // const sortedOrders = issues;
-  // const filteredOrders = sortedOrders;
 
   useEffect(() => {
     const getIssues = async () => {
@@ -180,18 +177,18 @@ export default function Page({ searchParams }) {
 
 // Sorting and filtering has to be done on the server.
 
-function applySort(row, sortDir) {
-  return row.sort((a, b) => {
-    // Convert Supabase timestamptz to JavaScript Date object
-    const dateA = new Date(a.createdAt);
-    const dateB = new Date(b.createdAt);
-    if (sortDir === 'asc') {
-      return dateA.getTime() - dateB.getTime();
-    }
+// function applySort(row, sortDir) {
+//   return row.sort((a, b) => {
+//     // Convert Supabase timestamptz to JavaScript Date object
+//     const dateA = new Date(a.createdAt);
+//     const dateB = new Date(b.createdAt);
+//     if (sortDir === 'asc') {
+//       return dateA.getTime() - dateB.getTime();
+//     }
 
-    return dateB.getTime() - dateA.getTime();
-  });
-}
+//     return dateB.getTime() - dateA.getTime();
+//   });
+// }
 
 function applyFilters(row, { customer, id, status }) {
   return row.filter((item) => {
@@ -202,7 +199,7 @@ function applyFilters(row, { customer, id, status }) {
     }
 
     if (id) {
-      if (item.id != id) {
+      if (item.id !== id) {
         return false;
       }
     }

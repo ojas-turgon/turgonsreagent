@@ -105,6 +105,34 @@ const columns = [
   {
     formatter: (row) => {
       const mapping = {
+        Technical_Info: {
+          label: 'Technical_Info',
+          icon: <ClockIcon color="var(--mui-palette-warning-main)" weight="fill" />,
+        },
+        Technical_Critical: {
+          label: 'Technical_Critical',
+          icon: <MinusIcon color="var(--mui-palette-error-main)" weight="fill" />,
+        },
+        Bussiness_Info: { label: 'Bussiness_Info', icon: <CheckCircleIcon color="var(--mui-palette-success-main)" /> },
+        Bussiness_Critical: {
+          label: 'Bussiness_Critical',
+          icon: <CheckCircleIcon color="var(--mui-palette-success-main)" weight="fill" />,
+        },
+        Super_Admin: {
+          label: 'Super_Admin',
+          icon: <ClockIcon color="var(--mui-palette-warning-main)" weight="fill" />,
+        },
+      };
+      const { label, icon } = mapping[row.category] ?? { label: 'Unknown', icon: null };
+
+      return <Chip icon={icon} label={label} size="small" variant="outlined" />;
+    },
+    name: 'Category',
+    width: '100px',
+  },
+  {
+    formatter: (row) => {
+      const mapping = {
         P0: { label: 'P0', icon: <ClockIcon color="var(--mui-palette-warning-main)" weight="fill" /> },
         P1: {
           label: 'P1',
