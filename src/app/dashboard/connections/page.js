@@ -41,6 +41,14 @@ export default function Page() {
             <img src="/assets/teams.jpg" alt="Connection 3" style={{ maxWidth: '100%', height: 'auto' }} />
           </Box>
         </Box>
+
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 4 }}>
+          <Box sx={{ width: '30%', textAlign: 'center' }}>
+            <img src="/assets/pagerduty.svg" alt="Connection 1" style={{ maxWidth: '100%', height: 'auto' }} />
+          </Box>
+          <Box sx={{ width: '30%', textAlign: 'center' }}></Box>
+          <Box sx={{ width: '30%', textAlign: 'center' }}></Box>
+        </Box>
       </Stack>
     </Box>
   );

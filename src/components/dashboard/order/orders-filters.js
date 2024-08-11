@@ -166,7 +166,7 @@ function CustomerFilterPopover() {
   }, [initialValue]);
 
   return (
-    <FilterPopover anchorEl={anchorEl} onClose={onClose} open={open} title="Filter by customer">
+    <FilterPopover anchorEl={anchorEl} onClose={onClose} open={open} title="Filter by Priority (P0, P1, P2, P3)">
       <FormControl>
         <OutlinedInput
           onChange={(event) => {
@@ -201,7 +201,7 @@ function IdFilterPopover() {
   }, [initialValue]);
 
   return (
-    <FilterPopover anchorEl={anchorEl} onClose={onClose} open={open} title="Filter by ID">
+    <FilterPopover anchorEl={anchorEl} onClose={onClose} open={open} title="Filter by ISSUE-ID">
       <FormControl>
         <OutlinedInput
           onChange={(event) => {
