@@ -212,7 +212,7 @@ export default function Page({ params }) {
     <!-- Embed this line anywhere in your website to add the chatbot -->
     <iframe
       id="TurgonChatBot" 
-      src="http://turgon.ai/cschat?id=dynpro" 
+      src="https://turgon.ai/cschat?id=dynpro" 
       scrolling="yes"
       style="position: fixed; bottom: 0; right: 0; width: 600px; height: 600px;
              border: 0; background-color: transparent; overflow: scroll;"
