@@ -9,8 +9,10 @@ import Chip from '@mui/material/Chip';
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
+import { Briefcase as BriefcaseIcon } from '@phosphor-icons/react/dist/ssr/Briefcase';
 import { CheckCircle as CheckCircleIcon } from '@phosphor-icons/react/dist/ssr/CheckCircle';
 import { Clock as ClockIcon } from '@phosphor-icons/react/dist/ssr/Clock';
+import { Code as CodeIcon } from '@phosphor-icons/react/dist/ssr/Code';
 // import { Eye as EyeIcon } from '@phosphor-icons/react/dist/ssr/Eye';
 import { Minus as MinusIcon } from '@phosphor-icons/react/dist/ssr/Minus';
 import { XCircle as XCircleIcon } from '@phosphor-icons/react/dist/ssr/XCircle';
@@ -107,16 +109,16 @@ const columns = [
       const mapping = {
         Technical_Info: {
           label: 'Technical_Info',
-          icon: <ClockIcon color="var(--mui-palette-warning-main)" weight="fill" />,
+          icon: <CodeIcon color="var(--mui-palette-warning-main)" weight="fill" />,
         },
         Technical_Critical: {
           label: 'Technical_Critical',
-          icon: <MinusIcon color="var(--mui-palette-error-main)" weight="fill" />,
+          icon: <CodeIcon color="var(--mui-palette-error-main)" weight="fill" />,
         },
-        Bussiness_Info: { label: 'Bussiness_Info', icon: <CheckCircleIcon color="var(--mui-palette-success-main)" /> },
+        Bussiness_Info: { label: 'Bussiness_Info', icon: <BriefcaseIcon color="var(--mui-palette-warning-main)" /> },
         Bussiness_Critical: {
           label: 'Bussiness_Critical',
-          icon: <CheckCircleIcon color="var(--mui-palette-success-main)" weight="fill" />,
+          icon: <BriefcaseIcon color="var(--mui-palette-error-main)" weight="fill" />,
         },
         Super_Admin: {
           label: 'Super_Admin',
