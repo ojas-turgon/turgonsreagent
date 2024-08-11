@@ -31,9 +31,7 @@ export function AppUsage({ data }) {
               <Typography color="success.main" variant="h2">
                 70%
               </Typography>
-              <Typography color="text.secondary">
-                decrease in app errors since Turgon AI SRE Agent was deployed
-              </Typography>
+              <Typography color="text.secondary">decrease in app errors since Turgon AI Agent was deployed</Typography>
             </Stack>
           </Stack>
           <Stack divider={<Divider />} spacing={2} sx={{ flex: '1 1 auto' }}>
