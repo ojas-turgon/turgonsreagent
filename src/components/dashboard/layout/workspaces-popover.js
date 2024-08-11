@@ -7,7 +7,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 
 export const workspaces = [
-  { name: 'DynPro', avatar: '/assets/dynpro1.jpg' },
+  { name: 'Lucid Motors', avatar: '/assets/lucid.png' },
   { name: 'Turgon', avatar: '/assets/turgonicon.png' },
 ];
 
