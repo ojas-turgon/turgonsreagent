@@ -99,7 +99,7 @@ export default function Page({ params }) {
             <Stack direction={{ xs: 'column', sm: 'row' }} spacing={3} sx={{ alignItems: 'flex-start' }}>
               <Box sx={{ flex: '1 1 auto' }}>
                 <Typography variant="h5" sx={{ mb: 2 }}>
-                  ORD-001 ({orderId})
+                  {order && order.issueid}
                 </Typography>
                 <Stack direction="row" spacing={1}>
                   <Chip label={order && order.status} color="primary" />
