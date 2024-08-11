@@ -125,7 +125,7 @@ export default function Page({ searchParams }) {
             <Summary amount={240} diff={5} icon={UsersIcon} title="Open Issues" trend="down" />
           </Grid>
           <Grid md={4} xs={12}>
-            <Summary amount={21} diff={12} icon={WarningIcon} title="TBD" trend="up" />
+            <Summary amount={21} diff={12} icon={WarningIcon} title="Critical Issues" trend="down" />
           </Grid>
           <Grid md={12} xs={12}>
             <AppUsage
