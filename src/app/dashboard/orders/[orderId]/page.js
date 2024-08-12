@@ -130,7 +130,7 @@ export default function Page({ params }) {
                       <Avatar>
                         <CreditCardIcon
                           fontSize="var(--Icon-fontSize)"
-                          color="var(--mui-palette-primary-main)"
+                          // color="var(--mui-palette-primary-main)"
                           weight="bold"
                         />
                       </Avatar>
@@ -169,7 +169,7 @@ export default function Page({ params }) {
                       <Avatar>
                         <ShoppingCartSimpleIcon
                           fontSize="var(--Icon-fontSize)"
-                          color="var(--mui-palette-primary-main)"
+                          // color="var(--mui-palette-primary-main)"
                           weight="bold"
                         />
                       </Avatar>
@@ -195,7 +195,7 @@ export default function Page({ params }) {
                       <Avatar>
                         <TimerIcon
                           fontSize="var(--Icon-fontSize)"
-                          color="var(--mui-palette-primary-main)"
+                          // color="var(--mui-palette-primary-main)"
                           weight="bold"
                         />
                       </Avatar>
@@ -218,7 +218,7 @@ export default function Page({ params }) {
                       <Avatar>
                         <HeadsetIcon
                           fontSize="var(--Icon-fontSize)"
-                          color="var(--mui-palette-primary-main)"
+                          // color="var(--mui-palette-primary-main)"
                           weight="bold"
                         />
                       </Avatar>
@@ -238,7 +238,7 @@ export default function Page({ params }) {
     <!-- Embed this line anywhere in your website to add the chatbot -->
     <iframe
       id="TurgonChatBot" 
-      src="https://turgon.ai/cschat?id=${orderId}" 
+      src="http://localhost:3001/cschat?id=${orderId}" 
       scrolling="yes"
       style="width: 100%; height: 600px;
              border: 0; background-color: transparent; overflow: scroll;"
