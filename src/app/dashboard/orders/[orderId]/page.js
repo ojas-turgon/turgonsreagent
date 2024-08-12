@@ -121,7 +121,15 @@ export default function Page({ params }) {
           <Grid container spacing={4}>
             <Grid md={6} xs={12}>
               <Stack spacing={4}>
-                <Card sx={{ height: '600px', overflow: 'auto' }}>
+                <Card
+                  sx={{
+                    height: '400px',
+                    overflow: 'auto',
+                    '&::-webkit-scrollbar': { display: 'none' },
+                    scrollbarWidth: 'none',
+                    msOverflowStyle: 'none',
+                  }}
+                >
                   <CardHeader
                     // action={
                     //   // <Button color="secondary" startIcon={<PencilSimpleIcon />}>
@@ -165,7 +173,15 @@ export default function Page({ params }) {
                     )}
                   </CardContent>
                 </Card>
-                <Card sx={{ height: '800px' }}>
+                <Card
+                  sx={{
+                    height: '800px',
+                    overflow: 'auto',
+                    '&::-webkit-scrollbar': { display: 'none' },
+                    scrollbarWidth: 'none',
+                    msOverflowStyle: 'none',
+                  }}
+                >
                   <CardHeader
                     avatar={
                       <Avatar>
@@ -220,7 +236,15 @@ export default function Page({ params }) {
             </Grid>
             <Grid md={6} xs={12}>
               <Stack spacing={4}>
-                <Card sx={{ height: '600px', overflow: 'auto' }}>
+                <Card
+                  sx={{
+                    height: '400px',
+                    overflow: 'auto',
+                    '&::-webkit-scrollbar': { display: 'none' },
+                    scrollbarWidth: 'none',
+                    msOverflowStyle: 'none',
+                  }}
+                >
                   <CardHeader
                     avatar={
                       <Avatar>
@@ -243,7 +267,15 @@ export default function Page({ params }) {
                     )}
                   </CardContent>
                 </Card>
-                <Card sx={{ height: '800px', overflow: 'auto' }}>
+                <Card
+                  sx={{
+                    height: '800px',
+                    overflow: 'auto',
+                    '&::-webkit-scrollbar': { display: 'none' },
+                    scrollbarWidth: 'none',
+                    msOverflowStyle: 'none',
+                  }}
+                >
                   <CardHeader
                     avatar={
                       <Avatar>
