@@ -21,6 +21,7 @@ import { FirstAid as ShoppingCartSimpleIcon } from '@phosphor-icons/react/dist/s
 import { Headset as HeadsetIcon } from '@phosphor-icons/react/dist/ssr/Headset';
 import { Notepad as TimerIcon } from '@phosphor-icons/react/dist/ssr/Notepad';
 import { Radical as CreditCardIcon } from '@phosphor-icons/react/dist/ssr/Radical';
+import { Repeat as RepeatIcon } from '@phosphor-icons/react/dist/ssr/Repeat';
 import { createClient } from '@supabase/supabase-js';
 
 import { paths } from '@/paths';
@@ -106,6 +107,7 @@ export default function Page({ params }) {
                   <Chip label={order && order.status} color="primary" />
                   <Chip label={order && order.recipe} color="warning" />
                   <Chip label={order && order.category} color="success" />
+                  <Chip icon={<RepeatIcon />} label={order && order.numoccur} color="error" />
                 </Stack>
               </Box>
               <div>
