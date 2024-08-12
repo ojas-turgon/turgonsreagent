@@ -165,7 +165,7 @@ export default function Page({ params }) {
                     )}
                   </CardContent>
                 </Card>
-                <Card sx={{ height: '600px' }}>
+                <Card sx={{ height: '800px' }}>
                   <CardHeader
                     avatar={
                       <Avatar>
@@ -243,7 +243,7 @@ export default function Page({ params }) {
                     )}
                   </CardContent>
                 </Card>
-                <Card sx={{ height: '600px', overflow: 'auto' }}>
+                <Card sx={{ height: '800px', overflow: 'auto' }}>
                   <CardHeader
                     avatar={
                       <Avatar>
