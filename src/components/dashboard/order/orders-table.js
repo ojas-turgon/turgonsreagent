@@ -9,7 +9,7 @@ import Chip from '@mui/material/Chip';
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-\import { ArrowCircleDownRight } from '@phosphor-icons/react/dist/ssr/ArrowCircleDownRight';
+import { ArrowCircleDownRight } from '@phosphor-icons/react/dist/ssr/ArrowCircleDownRight';
 import { ArrowCircleUp } from '@phosphor-icons/react/dist/ssr/ArrowCircleUp';
 import { ArrowCircleUpRight } from '@phosphor-icons/react/dist/ssr/ArrowCircleUpRight';
 import { Briefcase as BriefcaseIcon } from '@phosphor-icons/react/dist/ssr/Briefcase';
