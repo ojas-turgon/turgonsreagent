@@ -9,6 +9,13 @@ import Chip from '@mui/material/Chip';
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
+import { ArrowCircleDown } from '@phosphor-icons/react/dist/ssr/ArrowCircleDown';
+import { ArrowCircleDownLeft } from '@phosphor-icons/react/dist/ssr/ArrowCircleDownLeft';
+import { ArrowCircleDownRight } from '@phosphor-icons/react/dist/ssr/ArrowCircleDownRight';
+import { ArrowCircleRight } from '@phosphor-icons/react/dist/ssr/ArrowCircleRight';
+import { ArrowCircleUp } from '@phosphor-icons/react/dist/ssr/ArrowCircleUp';
+import { ArrowCircleUpLeft } from '@phosphor-icons/react/dist/ssr/ArrowCircleUpLeft';
+import { ArrowCircleUpRight } from '@phosphor-icons/react/dist/ssr/ArrowCircleUpRight';
 import { Briefcase as BriefcaseIcon } from '@phosphor-icons/react/dist/ssr/Briefcase';
 import { CheckCircle as CheckCircleIcon } from '@phosphor-icons/react/dist/ssr/CheckCircle';
 import { Clock as ClockIcon } from '@phosphor-icons/react/dist/ssr/Clock';
@@ -135,13 +142,13 @@ const columns = [
   {
     formatter: (row) => {
       const mapping = {
-        P0: { label: 'P0', icon: <ClockIcon color="var(--mui-palette-warning-main)" weight="fill" /> },
+        P0: { label: 'P0', icon: <ArrowCircleUp color="var(--mui-palette-error-main)" weight="fill" /> },
         P1: {
           label: 'P1',
-          icon: <CheckCircleIcon color="var(--mui-palette-success-main)" weight="fill" />,
+          icon: <ArrowCircleUpRight color="var(--mui-palette-error-main)" weight="fill" />,
         },
-        P2: { label: 'P2', icon: <XCircleIcon color="var(--mui-palette-error-main)" weight="fill" /> },
-        P3: { label: 'P3', icon: <MinusIcon color="var(--mui-palette-error-main)" /> },
+        P2: { label: 'P2', icon: <ArrowCircleDownRight color="var(--mui-palette-warning-main)" weight="fill" /> },
+        P3: { label: 'P3', icon: <MinusIcon color="var(--mui-palette-success-main)" /> },
       };
       const { label, icon } = mapping[row.priority] ?? { label: 'Unknown', icon: null };
 
