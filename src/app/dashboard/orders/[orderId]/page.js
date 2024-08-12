@@ -174,7 +174,7 @@ export default function Page({ params }) {
                         />
                       </Avatar>
                     }
-                    title="Chat with Turgon AI SRE Agent"
+                    title="Chat with Turgon AI Agent"
                   />
                   <CardContent>
                     {order && (
