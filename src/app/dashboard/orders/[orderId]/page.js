@@ -119,7 +119,7 @@ export default function Page({ params }) {
           <Grid container spacing={4}>
             <Grid md={6} xs={12}>
               <Stack spacing={4}>
-                <Card>
+                <Card sx={{ height: '600px', overflow: 'auto' }}>
                   <CardHeader
                     // action={
                     //   // <Button color="secondary" startIcon={<PencilSimpleIcon />}>
@@ -163,56 +163,7 @@ export default function Page({ params }) {
                     )}
                   </CardContent>
                 </Card>
-                <Card>
-                  <CardHeader
-                    avatar={
-                      <Avatar>
-                        <ShoppingCartSimpleIcon
-                          fontSize="var(--Icon-fontSize)"
-                          // color="var(--mui-palette-primary-main)"
-                          weight="bold"
-                        />
-                      </Avatar>
-                    }
-                    title="Remediation"
-                  />
-                  <CardContent>
-                    {showSkeleton && <Skeleton />}
-                    {!showSkeleton && (
-                      <Typography variant="subtitle2" style={{ whiteSpace: 'pre-line' }}>
-                        {order && order.remediation}
-                      </Typography>
-                    )}
-                  </CardContent>
-                </Card>
-              </Stack>
-            </Grid>
-            <Grid md={6} xs={12}>
-              <Stack spacing={4}>
-                <Card>
-                  <CardHeader
-                    avatar={
-                      <Avatar>
-                        <TimerIcon
-                          fontSize="var(--Icon-fontSize)"
-                          // color="var(--mui-palette-primary-main)"
-                          weight="bold"
-                        />
-                      </Avatar>
-                    }
-                    title="Logs"
-                  />
-                  <CardContent>
-                    {order && (
-                      <Box sx={{ overflowX: 'hidden', overflowY: 'auto', maxHeight: '400px' }}>
-                        <Typography variant="body2" sx={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>
-                          {JSON.stringify(order.errormsg, null, 2)}
-                        </Typography>
-                      </Box>
-                    )}
-                  </CardContent>
-                </Card>
-                <Card sx={{ minHeight: '600px' }}>
+                <Card sx={{ height: '600px' }}>
                   <CardHeader
                     avatar={
                       <Avatar>
@@ -232,7 +183,7 @@ export default function Page({ params }) {
                         {/* Embedding external content via iframes and injecting scripts can pose security risks */}
 
                         <div
-                          style={{ minHeight: '600px' }}
+                          style={{ minHeight: '500px' }}
                           dangerouslySetInnerHTML={{
                             __html: `
     <!-- Embed this line anywhere in your website to add the chatbot -->
@@ -260,6 +211,67 @@ export default function Page({ params }) {
                           }}
                         />
                       </Box>
+                    )}
+                  </CardContent>
+                </Card>
+              </Stack>
+            </Grid>
+            <Grid md={6} xs={12}>
+              <Stack spacing={4}>
+                <Card sx={{ height: '600px', overflow: 'auto' }}>
+                  <CardHeader
+                    avatar={
+                      <Avatar>
+                        <TimerIcon
+                          fontSize="var(--Icon-fontSize)"
+                          // color="var(--mui-palette-primary-main)"
+                          weight="bold"
+                        />
+                      </Avatar>
+                    }
+                    title="Logs"
+                  />
+                  <CardContent>
+                    {order && (
+                      <Box sx={{ overflowX: 'hidden', overflowY: 'auto', maxHeight: '400px' }}>
+                        <Typography variant="body2" sx={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>
+                          {JSON.stringify(order.errormsg, null, 2)}
+                        </Typography>
+                      </Box>
+                    )}
+                  </CardContent>
+                </Card>
+                <Card sx={{ height: '600px', overflow: 'auto' }}>
+                  <CardHeader
+                    avatar={
+                      <Avatar>
+                        <ShoppingCartSimpleIcon
+                          fontSize="var(--Icon-fontSize)"
+                          // color="var(--mui-palette-primary-main)"
+                          weight="bold"
+                        />
+                      </Avatar>
+                    }
+                    title="Remediation"
+                  />
+                  <CardContent>
+                    {showSkeleton && <Skeleton />}
+                    {!showSkeleton && (
+                      <Typography variant="subtitle2" style={{ whiteSpace: 'pre-line' }}>
+                        {order &&
+                          order.remediation &&
+                          order.remediation.split('\n').map((line, index, array) => (
+                            <React.Fragment key={index}>
+                              {line}
+                              {index < array.length - 1 && (
+                                <>
+                                  <br />
+                                  <br />
+                                </>
+                              )}
+                            </React.Fragment>
+                          ))}
+                      </Typography>
                     )}
                   </CardContent>
                 </Card>
