@@ -6,6 +6,7 @@ import {
   kepple,
   neonBlue,
   nevada,
+  purple,
   redOrange,
   royalBlue,
   shakespeare,
@@ -14,6 +15,22 @@ import {
 } from './colors';
 
 const primarySchemes = {
+  purple: {
+    dark: {
+      ...purple,
+      light: purple[300],
+      main: purple[400],
+      dark: purple[500],
+      contrastText: 'var(--mui-palette-common-black)',
+    },
+    light: {
+      ...purple,
+      light: purple[400],
+      main: purple[500],
+      dark: purple[600],
+      contrastText: 'var(--mui-palette-common-white)',
+    },
+  },
   chateauGreen: {
     dark: {
       ...chateauGreen,

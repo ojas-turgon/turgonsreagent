@@ -18,8 +18,9 @@ import Grid from '@mui/material/Unstable_Grid2';
 import { ArrowLeft as ArrowLeftIcon } from '@phosphor-icons/react/dist/ssr/ArrowLeft';
 import { CaretDown as CaretDownIcon } from '@phosphor-icons/react/dist/ssr/CaretDown';
 import { FirstAid as ShoppingCartSimpleIcon } from '@phosphor-icons/react/dist/ssr/FirstAid';
+import { Headset as HeadsetIcon } from '@phosphor-icons/react/dist/ssr/Headset';
+import { Notepad as TimerIcon } from '@phosphor-icons/react/dist/ssr/Notepad';
 import { Radical as CreditCardIcon } from '@phosphor-icons/react/dist/ssr/Radical';
-import { Timer as TimerIcon } from '@phosphor-icons/react/dist/ssr/Timer';
 import { createClient } from '@supabase/supabase-js';
 
 import { paths } from '@/paths';
@@ -127,7 +128,11 @@ export default function Page({ params }) {
                     // }
                     avatar={
                       <Avatar>
-                        <CreditCardIcon fontSize="var(--Icon-fontSize)" />
+                        <CreditCardIcon
+                          fontSize="var(--Icon-fontSize)"
+                          color="var(--mui-palette-primary-main)"
+                          weight="bold"
+                        />
                       </Avatar>
                     }
                     title="Root Cause Analysis"
@@ -162,7 +167,11 @@ export default function Page({ params }) {
                   <CardHeader
                     avatar={
                       <Avatar>
-                        <ShoppingCartSimpleIcon fontSize="var(--Icon-fontSize)" />
+                        <ShoppingCartSimpleIcon
+                          fontSize="var(--Icon-fontSize)"
+                          color="var(--mui-palette-primary-main)"
+                          weight="bold"
+                        />
                       </Avatar>
                     }
                     title="Remediation"
@@ -179,42 +188,59 @@ export default function Page({ params }) {
               </Stack>
             </Grid>
             <Grid md={6} xs={12}>
-              <Card>
-                <CardHeader
-                  avatar={
-                    <Avatar>
-                      <TimerIcon fontSize="var(--Icon-fontSize)" />
-                    </Avatar>
-                  }
-                  title="Logs"
-                />
-                <CardContent>
-                  {order && (
-                    <Box sx={{ overflowX: 'hidden', overflowY: 'auto', maxHeight: '400px' }}>
-                      <Typography variant="body2" sx={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>
-                        {JSON.stringify(order.errormsg, null, 2)}
-                      </Typography>
-                    </Box>
-                  )}
-                </CardContent>
-              </Card>
-            </Grid>
-          </Grid>
-        </Stack>
-      </Box>
+              <Stack spacing={4}>
+                <Card>
+                  <CardHeader
+                    avatar={
+                      <Avatar>
+                        <TimerIcon
+                          fontSize="var(--Icon-fontSize)"
+                          color="var(--mui-palette-primary-main)"
+                          weight="bold"
+                        />
+                      </Avatar>
+                    }
+                    title="Logs"
+                  />
+                  <CardContent>
+                    {order && (
+                      <Box sx={{ overflowX: 'hidden', overflowY: 'auto', maxHeight: '400px' }}>
+                        <Typography variant="body2" sx={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>
+                          {JSON.stringify(order.errormsg, null, 2)}
+                        </Typography>
+                      </Box>
+                    )}
+                  </CardContent>
+                </Card>
+                <Card sx={{ minHeight: '600px' }}>
+                  <CardHeader
+                    avatar={
+                      <Avatar>
+                        <HeadsetIcon
+                          fontSize="var(--Icon-fontSize)"
+                          color="var(--mui-palette-primary-main)"
+                          weight="bold"
+                        />
+                      </Avatar>
+                    }
+                    title="Chat with Turgon AI SRE Agent"
+                  />
+                  <CardContent>
+                    {order && (
+                      <Box sx={{ overflowX: 'hidden', overflowY: 'auto', minHeight: '600px', maxHeight: '800px' }}>
+                        {/* Warning: The following code contains unsafe elements and should not be used in production */}
+                        {/* Embedding external content via iframes and injecting scripts can pose security risks */}
 
-      {/* Warning: The following code contains unsafe elements and should not be used in production */}
-      {/* Embedding external content via iframes and injecting scripts can pose security risks */}
-
-      <div
-        dangerouslySetInnerHTML={{
-          __html: `
+                        <div
+                          style={{ minHeight: '600px' }}
+                          dangerouslySetInnerHTML={{
+                            __html: `
     <!-- Embed this line anywhere in your website to add the chatbot -->
     <iframe
       id="TurgonChatBot" 
       src="https://turgon.ai/cschat?id=${orderId}" 
       scrolling="yes"
-      style="position: fixed; bottom: 0; right: 0; width: 800px; height: 600px;
+      style="width: 100%; height: 600px;
              border: 0; background-color: transparent; overflow: scroll;"
     ></iframe>
 
@@ -231,8 +257,17 @@ export default function Page({ params }) {
       });
     </script>
   `,
-        }}
-      />
+                          }}
+                        />
+                      </Box>
+                    )}
+                  </CardContent>
+                </Card>
+              </Stack>
+            </Grid>
+          </Grid>
+        </Stack>
+      </Box>
     </>
   );
 }
