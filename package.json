@@ -57,7 +57,7 @@
     "i18next": "23.10.0",
     "i18next-http-backend": "2.5.0",
     "mapbox-gl": "3.1.2",
-    "next": "14.1.0",
+    "next": "^14.1.0",
     "next-i18next": "15.2.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",

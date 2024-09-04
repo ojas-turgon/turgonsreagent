@@ -55,7 +55,7 @@ export function SideNav({ color = 'evident', items = [] }) {
           <Box component={RouterLink} href={paths.home} sx={{ display: 'inline-flex' }}>
             <Logo color={logoColor} height={80} width={120} />
           </Box>
-          <Box
+          {/* <Box
             component="img"
             src="/assets/dynpro.png"
             alt="DynPro Logo"
@@ -66,7 +66,7 @@ export function SideNav({ color = 'evident', items = [] }) {
               mt: 2,
               mb: 2,
             }}
-          />
+          /> */}
         </div>
         <WorkspacesSwitch />
       </Stack>
