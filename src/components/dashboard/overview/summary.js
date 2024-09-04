@@ -9,7 +9,7 @@ import Typography from '@mui/material/Typography';
 import { TrendDown as TrendDownIcon } from '@phosphor-icons/react/dist/ssr/TrendDown';
 import { TrendUp as TrendUpIcon } from '@phosphor-icons/react/dist/ssr/TrendUp';
 
-export function Summary({ amount, diff, icon: Icon, title, trend }) {
+export function Summary({ amount, diff, icon: Icon, title, trend, amount_subtitle = null }) {
   return (
     <Card>
       <CardContent>
@@ -29,7 +29,8 @@ export function Summary({ amount, diff, icon: Icon, title, trend }) {
               {title}
             </Typography>
             <Typography variant="h3">{new Intl.NumberFormat('en-US').format(amount)}</Typography>
-          </div>
+            {amount_subtitle && <Typography color="text.secondary" variant="body1">{amount_subtitle}</Typography>}
+            </div>
         </Stack>
       </CardContent>
       <Divider />

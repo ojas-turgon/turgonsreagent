@@ -122,7 +122,7 @@ export default function Page({ searchParams }) {
             <Summary amount={106} diff={15} icon={ListChecksIcon} title="Recipies" trend="up" />
           </Grid>
           <Grid md={4} xs={12}>
-            <Summary amount={94} diff={28} icon={UsersIcon} title="Open Issues" trend="down" />
+            <Summary amount={94} diff={28} icon={UsersIcon} title="Open Issues" trend="down" amount_subtitle="condensed from 20K+ logs" />
           </Grid>
           <Grid md={4} xs={12}>
             <Summary amount={23} diff={52} icon={WarningIcon} title="Critical Issues" trend="down" />
