@@ -29,7 +29,7 @@ export function Summary({ amount, diff, icon: Icon, title, trend, amountsubtitle
               {title}
             </Typography>
             <Typography variant="h3">{new Intl.NumberFormat('en-US').format(amount)}</Typography>
-            {amount_subtitle && <Typography color="text.secondary" variant="body1">{amountsubtitle}</Typography>}
+            {amountsubtitle && <Typography color="text.secondary" variant="body1">{amountsubtitle}</Typography>}
             </div>
         </Stack>
       </CardContent>
