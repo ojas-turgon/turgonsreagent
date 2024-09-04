@@ -122,10 +122,10 @@ export default function Page({ searchParams }) {
             <Summary amount={106} diff={15} icon={ListChecksIcon} title="Recipies" trend="up" />
           </Grid>
           <Grid md={4} xs={12}>
-            <Summary amount={94} diff={5} icon={UsersIcon} title="Open Issues" trend="down" />
+            <Summary amount={94} diff={28} icon={UsersIcon} title="Open Issues" trend="down" />
           </Grid>
           <Grid md={4} xs={12}>
-            <Summary amount={23} diff={12} icon={WarningIcon} title="Critical Issues" trend="down" />
+            <Summary amount={23} diff={52} icon={WarningIcon} title="Critical Issues" trend="down" />
           </Grid>
           <Grid md={12} xs={12}>
             <AppUsage
