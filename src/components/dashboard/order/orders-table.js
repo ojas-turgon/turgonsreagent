@@ -16,14 +16,18 @@ import { Briefcase as BriefcaseIcon } from '@phosphor-icons/react/dist/ssr/Brief
 import { CheckCircle as CheckCircleIcon } from '@phosphor-icons/react/dist/ssr/CheckCircle';
 import { Clock as ClockIcon } from '@phosphor-icons/react/dist/ssr/Clock';
 import { Code as CodeIcon } from '@phosphor-icons/react/dist/ssr/Code';
+import { TreePalm as TreePalmIcon } from '@phosphor-icons/react/dist/ssr/TreePalm';
 // import { Eye as EyeIcon } from '@phosphor-icons/react/dist/ssr/Eye';
 import { Minus as MinusIcon } from '@phosphor-icons/react/dist/ssr/Minus';
+import { Repeat as RepeatIcon } from '@phosphor-icons/react/dist/ssr/Repeat';
 
 import { paths } from '@/paths';
 import { dayjs } from '@/lib/dayjs';
 import { DataTable } from '@/components/core/data-table';
 
 import { useOrdersSelection } from './orders-selection-context';
+import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Button, IconButton, Divider } from '@mui/material';
+
 
 const columns = [
   {
@@ -48,6 +52,7 @@ const columns = [
   },
   {
     formatter: (row) => {
+      const [dialogOpen, setDialogOpen] = React.useState(false);
       return (
         <Stack direction="row" spacing={2} sx={{ alignItems: 'center' }}>
           <div>
@@ -60,6 +65,7 @@ const columns = [
             >
               {row.issueid}
             </Link>
+
             {/* <Typography color="text.secondary" variant="body2">
             {row.lineItems} products •{' '}
             <Box component="span" sx={{ whiteSpace: 'nowrap' }}>
@@ -67,16 +73,39 @@ const columns = [
             </Box>
           </Typography> */}
           </div>{' '}
-        </Stack>
+          <Chip icon={<RepeatIcon />} label={row.numoccur} color="error" />
+          <Chip icon={<TreePalmIcon />} label={row.cascadingerrors ? row.cascadingerrors.split('\n').length : 0} color="success" onClick={() => setDialogOpen(true)} />
+          <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)}>
+            <DialogTitle>Cascading Errors</DialogTitle>
+            <DialogContent>
+              <DialogContentText>
+                These cascading errors followed the original error, and have a root cause that is this issue. Once we fix the orignal issue, these errors will automatically be fixed. They do not need independent remidiation.   They are therefore lumped together under this issue.
+              </DialogContentText>
+              <Divider sx={{ my: 2 }} />
+              {/* Add content for cascading errors here */}
+              <Typography variant="body1">
+                {row.cascadingerrors.split('\n').map((line, index) => (
+                  <React.Fragment key={index}>
+                    {line}
+                    <br />
+                  </React.Fragment>
+                ))}
+              </Typography>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={() => setDialogOpen(false)}>Close</Button>
+            </DialogActions>
+          </Dialog>
+          </Stack>
       );
     },
     name: 'Issue ID',
-    width: '100px',
+    width: '150px',
   },
   {
     formatter: (row) => (
       <Stack direction="row" spacing={2} sx={{ alignItems: 'center' }}>
-        <Typography variant="subtitle2">{row.recipe}</Typography>
+        <Typography variant="subtitle2">{row.recipe}</Typography>        
       </Stack>
     ),
     name: 'Recipe',

@@ -22,7 +22,9 @@ import { Headset as HeadsetIcon } from '@phosphor-icons/react/dist/ssr/Headset';
 import { Notepad as TimerIcon } from '@phosphor-icons/react/dist/ssr/Notepad';
 import { Radical as CreditCardIcon } from '@phosphor-icons/react/dist/ssr/Radical';
 import { Repeat as RepeatIcon } from '@phosphor-icons/react/dist/ssr/Repeat';
+import { TreePalm as TreePalmIcon } from '@phosphor-icons/react/dist/ssr/TreePalm';
 import { createClient } from '@supabase/supabase-js';
+import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@mui/material';
 
 import { paths } from '@/paths';
 import { PropertyItem } from '@/components/core/property-item';
@@ -43,11 +45,14 @@ async function getRCA(data) {
   const rcaData = await response.json();
   return rcaData;
 }
+
+
 export default function Page({ params }) {
   const { orderId } = params;
 
   const [order, setOrder] = useState(null);
   const [showSkeleton, setShowSkeleton] = useState(true);
+  const [dialogOpen, setDialogOpen] = React.useState(false);
 
   useEffect(() => {
     supabaseClient
@@ -108,6 +113,30 @@ export default function Page({ params }) {
                   <Chip label={order && order.recipe} color="warning" />
                   <Chip label={order && order.category} color="success" />
                   <Chip icon={<RepeatIcon />} label={order && order.numoccur} color="error" />
+                  <Chip icon={<TreePalmIcon />} label={order && order.cascadingerrors ? order.cascadingerrors.split('\n').length : 0} color="success" onClick={() => setDialogOpen(true)} />
+
+          <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)}>
+            <DialogTitle>Cascading Errors</DialogTitle>
+            <DialogContent>
+              <DialogContentText>
+                These cascading errors followed the original error, and have a root cause that is this issue. Once we fix the orignal issue, these errors will automatically be fixed. They do not need independent remidiation.   They are therefore lumped together under this issue.
+              </DialogContentText>
+              <Divider sx={{ my: 2 }} />
+              {/* Add content for cascading errors here */}
+              <Typography variant="body1">
+                {order && order.cascadingerrors.split('\n').map((line, index) => (
+                  <React.Fragment key={index}>
+                    {line}
+                    <br />
+                  </React.Fragment>
+                ))}
+              </Typography>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={() => setDialogOpen(false)}>Close</Button>
+            </DialogActions>
+          </Dialog>
+
                 </Stack>
               </Box>
               <div>

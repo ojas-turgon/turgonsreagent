@@ -14,8 +14,8 @@ import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxi
 import { NoSsr } from '@/components/core/no-ssr';
 
 const bars = [
-  { name: 'P0', dataKey: 'v1', color: 'var(--mui-palette-primary-400)' },
-  { name: 'P1', dataKey: 'v2', color: 'var(--mui-palette-primary-600)' },
+  { name: 'P1', dataKey: 'v2', color: 'var(--mui-palette-primary-400)' },
+  { name: 'P0', dataKey: 'v1', color: 'var(--mui-palette-primary-600)' },
 ];
 
 export function AppUsage({ data }) {
@@ -29,7 +29,7 @@ export function AppUsage({ data }) {
           <Stack spacing={3} sx={{ flex: '0 0 auto', justifyContent: 'space-between', width: '240px' }}>
             <Stack spacing={2}>
               <Typography color="success.main" variant="h2">
-                70%
+                67%
               </Typography>
               <Typography color="text.secondary">decrease in app errors since Turgon AI Agent was deployed</Typography>
             </Stack>

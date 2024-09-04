@@ -79,7 +79,7 @@ export default function Page({ searchParams }) {
   useEffect(() => {
     const getIssues = async () => {
       try {
-        const { data: fetchedIssues, error } = await supabaseClient.from('workatosre').select('*');
+        const { data: fetchedIssues, error } = await supabaseClient.from('workatosre').select('*').order('id', { ascending: true });
 
         if (error) {
           // eslint-disable-next-line no-console -- Debugging purpose
@@ -119,29 +119,29 @@ export default function Page({ searchParams }) {
         </Stack>
         <Grid container spacing={4}>
           <Grid md={4} xs={12}>
-            <Summary amount={31} diff={15} icon={ListChecksIcon} title="Recipies" trend="up" />
+            <Summary amount={106} diff={15} icon={ListChecksIcon} title="Recipies" trend="up" />
           </Grid>
           <Grid md={4} xs={12}>
-            <Summary amount={240} diff={5} icon={UsersIcon} title="Open Issues" trend="down" />
+            <Summary amount={94} diff={5} icon={UsersIcon} title="Open Issues" trend="down" />
           </Grid>
           <Grid md={4} xs={12}>
-            <Summary amount={21} diff={12} icon={WarningIcon} title="Critical Issues" trend="down" />
+            <Summary amount={23} diff={12} icon={WarningIcon} title="Critical Issues" trend="down" />
           </Grid>
           <Grid md={12} xs={12}>
             <AppUsage
               data={[
-                { name: 'W1May24', v1: 193, v2: 101 },
-                { name: 'W2May24', v1: 189, v2: 91 },
-                { name: 'W3May24', v1: 172, v2: 90 },
-                { name: 'W4May24', v1: 168, v2: 80 },
-                { name: 'W1Jun24', v1: 156, v2: 75 },
-                { name: 'W2Jun24', v1: 139, v2: 73 },
-                { name: 'W3Jun24', v1: 134, v2: 64 },
-                { name: 'W4Jun24', v1: 117, v2: 62 },
-                { name: 'W1Jul24', v1: 112, v2: 54 },
-                { name: 'W2Jul24', v1: 96, v2: 51 },
-                { name: 'W3Jul24', v1: 89, v2: 43 },
-                { name: 'W4Jul24', v1: 77, v2: 37 },
+                { name: 'W1May24', v1: 86, v2: 180 },
+                { name: 'W2May24', v1: 84, v2: 165},
+                { name: 'W3May24', v1: 78, v2: 143},
+                { name: 'W4May24', v1: 72, v2: 132 },
+                { name: 'W1Jun24', v1: 63, v2: 122 },
+                { name: 'W2Jun24', v1: 58, v2: 112 },
+                { name: 'W3Jun24', v1: 54, v2: 94 },
+                { name: 'W4Jun24', v1: 48, v2: 84 },
+                { name: 'W1Jul24', v1: 42, v2: 84 },
+                { name: 'W2Jul24', v1: 36, v2: 82 },
+                { name: 'W3Jul24', v1: 27, v2: 75 },
+                { name: 'W4Jul24', v1: 23, v2: 69 },
               ]}
             />
           </Grid>
