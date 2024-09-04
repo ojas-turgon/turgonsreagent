@@ -122,7 +122,7 @@ export default function Page({ searchParams }) {
             <Summary amount={106} diff={15} icon={ListChecksIcon} title="Recipies" trend="up" />
           </Grid>
           <Grid md={4} xs={12}>
-            <Summary amount={94} diff={28} icon={UsersIcon} title="Open Issues" trend="down" amount_subtitle="condensed from 100K+ logs" />
+            <Summary amount={94} diff={28} icon={UsersIcon} title="Open Issues" trend="down" amountsubtitle="condensed from 100K+ logs" />
           </Grid>
           <Grid md={4} xs={12}>
             <Summary amount={23} diff={52} icon={WarningIcon} title="Critical Issues" trend="down" />
@@ -130,18 +130,18 @@ export default function Page({ searchParams }) {
           <Grid md={12} xs={12}>
             <AppUsage
               data={[
-                { name: 'W1May24', v1: 86, v2: 180 },
-                { name: 'W2May24', v1: 84, v2: 165},
-                { name: 'W3May24', v1: 78, v2: 143},
-                { name: 'W4May24', v1: 72, v2: 132 },
-                { name: 'W1Jun24', v1: 63, v2: 122 },
-                { name: 'W2Jun24', v1: 58, v2: 112 },
-                { name: 'W3Jun24', v1: 54, v2: 94 },
-                { name: 'W4Jun24', v1: 48, v2: 84 },
-                { name: 'W1Jul24', v1: 42, v2: 84 },
-                { name: 'W2Jul24', v1: 36, v2: 82 },
-                { name: 'W3Jul24', v1: 27, v2: 75 },
-                { name: 'W4Jul24', v1: 23, v2: 69 },
+                { name: 'W1Jun24', v1: 86, v2: 180 },
+                { name: 'W2Jun24', v1: 84, v2: 165},
+                { name: 'W3Jun24', v1: 78, v2: 143},
+                { name: 'W4Jun24', v1: 72, v2: 132 },
+                { name: 'W1Jul24', v1: 63, v2: 122 },
+                { name: 'W2Jul24', v1: 58, v2: 112 },
+                { name: 'W3Jul24', v1: 54, v2: 94 },
+                { name: 'W4Jul24', v1: 48, v2: 84 },
+                { name: 'W1Aug24', v1: 42, v2: 84 },
+                { name: 'W2Aug24', v1: 36, v2: 82 },
+                { name: 'W3Aug24', v1: 27, v2: 75 },
+                { name: 'W4Aug24', v1: 23, v2: 69 },
               ]}
             />
           </Grid>
