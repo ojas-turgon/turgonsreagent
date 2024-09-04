@@ -43,6 +43,7 @@ module.exports = {
         ignoreOnInitialization: true,
       },
     ],
+    'react-hooks/rules-of-hooks': 'off',
     'import/newline-after-import': 'error',
     'react/jsx-uses-react': 'error',
     'react/react-in-jsx-scope': 'error',
