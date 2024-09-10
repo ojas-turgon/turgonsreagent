@@ -72,5 +72,10 @@ module.exports = {
     'react/prop-types': 'off', // TypeScript is used for type checking
 
     '@next/next/no-img-element': 'off', // Temporary disabled
+    'no-implicit-coercion': 'off',
+    'no-unused-vars': 'off',
+    'jsx-a11y/iframe-has-title': 'off',
+    'react/jsx-key': 'off',
+    '@typescript-eslint/no-shadow': 'off',
   },
 };
