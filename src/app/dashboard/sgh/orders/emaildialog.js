@@ -74,7 +74,7 @@ const EmailDialog = ({ open, handleClose, emailData, isLoading }) => {
           id="content"
           label="Email Content"
           multiline
-          rows={4}
+          rows={12}
           fullWidth
           variant="outlined"
           value={emailData.content}
