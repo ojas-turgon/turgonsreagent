@@ -18,32 +18,35 @@ const OrderCard = ({ order }) => {
   const status = order['Status'];
   const summary = order.comments;
   const [open, setOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [emailData, setEmailData] = useState({
-    to: 'example@example.com',
-    from: 'example@example.com',
-    cc: 'example@example.com',
-    subject: 'Example Subject',
-    content: 'Example Content',
+    to: '',
+    from: '',
+    cc: '',
+    subject: '',
+    content: '',
   });
 
   const handleClickOpen = async () => {
+    setOpen(true);
+
     try {
+      setIsLoading(true);
       const response = await fetch('https://www.turgon.ai/api/sghpo/genemail', {
         method: 'POST',
         body: JSON.stringify(order),
         headers: {
           'Content-Type': 'application/json',
         },
-        // mode: 'no-cors',
       });
       if (response.ok) {
         const responseEmailData = await response.json();
         setEmailData(responseEmailData);
-        setOpen(true);
       }
     } catch (error) {
-      // console.error('Failed to load PDF:', error);
-      setOpen(true);
+      console.error('Failed to generate email:', error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -90,7 +93,7 @@ const OrderCard = ({ order }) => {
           </Box>
         </CardContent>
       </Card>
-      <EmailDialog open={open} handleClose={handleClose} emailData={emailData} />
+      <EmailDialog open={open} handleClose={handleClose} emailData={emailData} isLoading={isLoading} />
     </>
   );
 };

@@ -1,5 +1,8 @@
 import React from 'react';
+import Backdrop from '@mui/material/Backdrop';
+import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import CircularProgress from '@mui/material/CircularProgress';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -7,11 +10,25 @@ import DialogTitle from '@mui/material/DialogTitle';
 import TextField from '@mui/material/TextField';
 import { PaperPlaneRight as SendIcon } from '@phosphor-icons/react';
 
-const EmailDialog = ({ open, handleClose, emailData }) => {
+const LoadingOverlay = () => (
+  <Backdrop
+    sx={{
+      color: '#fff',
+      zIndex: (theme) => theme.zIndex.drawer + 1,
+      position: 'absolute',
+    }}
+    open={true}
+  >
+    <CircularProgress color="inherit" />
+  </Backdrop>
+);
+
+const EmailDialog = ({ open, handleClose, emailData, isLoading }) => {
   return (
     <Dialog open={open} onClose={handleClose} fullWidth maxWidth="md">
       <DialogTitle>Draft Customer Email</DialogTitle>
       <DialogContent>
+        {isLoading && <LoadingOverlay />}
         <div style={{ display: 'flex', alignItems: 'center', marginBottom: '8px' }}>
           <TextField
             autoFocus
