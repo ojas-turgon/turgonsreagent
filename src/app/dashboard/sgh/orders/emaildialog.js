@@ -1,6 +1,5 @@
 import React from 'react';
 import Backdrop from '@mui/material/Backdrop';
-import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import CircularProgress from '@mui/material/CircularProgress';
 import Dialog from '@mui/material/Dialog';

@@ -44,7 +44,7 @@ const OrderCard = ({ order }) => {
         setEmailData(responseEmailData);
       }
     } catch (error) {
-      console.error('Failed to generate email:', error);
+      // console.error('Failed to generate email:', error);
     } finally {
       setIsLoading(false);
     }
