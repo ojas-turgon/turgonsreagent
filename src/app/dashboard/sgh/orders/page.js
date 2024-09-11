@@ -31,15 +31,9 @@ export default function Page({ searchParams }) {
   }, []);
 
   return (
-    <Stack spacing={2} sx={{ width: '100%' }}>
+    <Stack spacing={2} sx={{ width: '100%', background: 'linear-gradient(to bottom, #9FB1DA, #DDB7D2)' }}>
       {orders.map((order) => (
-        <OrderCard
-          key={order.id}
-          company={order['Customer Name']}
-          poNumber={order['Customer PO Number']}
-          status={order.Status}
-          summary={order.Summary}
-        />
+        <OrderCard key={order.id} order={order} />
       ))}
     </Stack>
   );

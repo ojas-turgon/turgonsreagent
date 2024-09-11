@@ -84,6 +84,7 @@ export default function Page() {
         justifyContent: 'center',
         minHeight: '100vh',
         padding: 3,
+        background: 'linear-gradient(to bottom, #9FB1DA, #DDB7D2)',
       }}
     >
       <Typography variant="h1" component="h1" gutterBottom sx={{ marginBottom: 3, marginTop: 3 }}>
@@ -134,16 +135,18 @@ export default function Page() {
                   <Box
                     sx={{
                       flex: 1,
-                      backgroundColor: '#f1f1f7',
+                      backgroundImage: 'url(/assets/cancelorderimage.png)',
                       backgroundSize: 'cover',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      height: 100,
+                      height: 200,
+                      width: 200,
                       cursor: 'pointer',
+                      borderRadius: '16px', // Add rounded corners
                     }}
                   >
-                    <Box
+                    {/* <Box
                       sx={{
                         display: 'flex',
                         justifyContent: 'center',
@@ -154,22 +157,25 @@ export default function Page() {
                       <Button variant="contained" color="primary">
                         View Cancelled Orders
                       </Button>
-                    </Box>
+                    </Box> */}
                   </Box>
                 </Link>
                 <Link href="/dashboard/sgh/orders?status=Delayed" passHref>
                   <Box
                     sx={{
                       flex: 1,
-                      backgroundColor: 'lightyellow',
+                      backgroundImage: 'url(/assets/delayedorderimage.png)',
+                      backgroundSize: 'cover',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      height: 100,
+                      height: 200,
+                      width: 200,
                       cursor: 'pointer',
+                      borderRadius: '16px', // Add rounded corners
                     }}
                   >
-                    <Box
+                    {/* <Box
                       sx={{
                         display: 'flex',
                         justifyContent: 'center',
@@ -180,22 +186,25 @@ export default function Page() {
                       <Button variant="contained" color="primary">
                         View Delayed Orders
                       </Button>
-                    </Box>
+                    </Box> */}
                   </Box>
                 </Link>
                 <Link href="/dashboard/sgh/orders?status=Shipped" passHref>
                   <Box
                     sx={{
                       flex: 1,
-                      backgroundColor: 'lightgreen',
+                      backgroundImage: 'url(/assets/shippedorderimage.png)',
+                      backgroundSize: 'cover',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      height: 100,
+                      height: 200,
+                      width: 200,
                       cursor: 'pointer',
+                      borderRadius: '16px', // Add rounded corners
                     }}
                   >
-                    <Box
+                    {/* <Box
                       sx={{
                         display: 'flex',
                         justifyContent: 'center',
@@ -206,7 +215,7 @@ export default function Page() {
                       <Button variant="contained" color="primary">
                         View Shipped Orders
                       </Button>
-                    </Box>
+                    </Box> */}
                   </Box>
                 </Link>
               </Stack>

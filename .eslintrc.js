@@ -77,5 +77,6 @@ module.exports = {
     'jsx-a11y/iframe-has-title': 'off',
     'react/jsx-key': 'off',
     '@typescript-eslint/no-shadow': 'off',
+    'jsx-a11y/no-autofocus': 'off',
   },
 };
