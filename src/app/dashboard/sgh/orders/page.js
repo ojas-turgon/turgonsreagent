@@ -2,7 +2,9 @@
 
 import * as React from 'react';
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
 import { createClient } from '@supabase/supabase-js';
 
 import OrderCard from './order';
@@ -32,6 +34,23 @@ export default function Page({ searchParams }) {
 
   return (
     <Stack spacing={2} sx={{ width: '100%', background: 'linear-gradient(to bottom, #9FB1DA, #DDB7D2)' }}>
+      <Link href="/dashboard/sgh" passHref>
+        <Typography
+          component="a"
+          variant="body1"
+          sx={{
+            color: 'black',
+            textDecoration: 'none',
+            '&:hover': {
+              textDecoration: 'underline',
+            },
+            marginLeft: '20px',
+            marginTop: '20px',
+          }}
+        >
+          &lt; Back to Dashboard
+        </Typography>
+      </Link>
       {orders.map((order) => (
         <OrderCard key={order.id} order={order} />
       ))}

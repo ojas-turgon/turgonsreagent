@@ -36,8 +36,9 @@ export function VerticalLayout({ children }) {
           minHeight: '100%',
         }}
       >
-        <SideNav color={settings.navColor} items={layoutConfig.navItems} />
-        <Box sx={{ display: 'flex', flex: '1 1 auto', flexDirection: 'column', pl: { lg: 'var(--SideNav-width)' } }}>
+        {/* <SideNav color={settings.navColor} items={layoutConfig.navItems} /> */}
+        {/* <Box sx={{ display: 'flex', flex: '1 1 auto', flexDirection: 'column', pl: { lg: 'var(--SideNav-width)' } }}> */}
+        <Box sx={{ display: 'flex', flex: '1 1 auto', flexDirection: 'column', pl: { lg: '0' } }}>
           <MainNav items={layoutConfig.navItems} />
           <Box
             component="main"

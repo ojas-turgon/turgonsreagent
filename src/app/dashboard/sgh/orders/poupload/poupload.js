@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Box, Button, createTheme, Paper, TextField, ThemeProvider, Typography } from '@mui/material';
 import LinearProgress from '@mui/material/LinearProgress';
@@ -183,6 +184,23 @@ export default function PoUpload(params) {
 
   return (
     <Stack spacing={1} marginTop={topMargin}>
+      <Link href="/dashboard/sgh" passHref>
+        <Typography
+          component="a"
+          variant="body1"
+          sx={{
+            color: 'black',
+            textDecoration: 'none',
+            '&:hover': {
+              textDecoration: 'underline',
+            },
+            marginLeft: '20px',
+            marginTop: '20px',
+          }}
+        >
+          &lt; Back to Dashboard
+        </Typography>
+      </Link>
       <ThemeProvider theme={darkTheme}>
         <SnackBar
           openSnackBar={openSnackBar}
