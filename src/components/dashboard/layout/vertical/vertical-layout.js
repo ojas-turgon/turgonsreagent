@@ -8,10 +8,11 @@ import { useSettings } from '@/hooks/use-settings';
 
 import { layoutConfig } from '../config';
 import { MainNav } from './main-nav';
-import { SideNav } from './side-nav';
+
+// import { SideNav } from './side-nav';
 
 export function VerticalLayout({ children }) {
-  const { settings } = useSettings();
+  // const { settings } = useSettings();
 
   return (
     <React.Fragment>
