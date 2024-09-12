@@ -34,7 +34,7 @@ const OrderCard = ({ order }) => {
   const company = order['Customer Name'];
   const poNumber = order['Customer PO Number'];
   const status = order['Status'];
-  const summary = order.comments;
+  const summary = order['Comments'];
   const [open, setOpen] = useState(false);
   const [showAiResponse, setShowAiResponse] = useState(false);
   const [showNotificationConfig, setShowNotificationConfig] = useState(false);
