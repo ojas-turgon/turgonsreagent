@@ -25,7 +25,7 @@ const notifications = [
     read: false,
     type: 'new_job',
     author: { name: 'Jie Yan', avatar: '/assets/avatar-8.png' },
-    job: { title: 'Remote React / React Native Developer' },
+    job: { title: 'New Order Added for PO 223455' },
   },
   {
     id: 'EV-003',
@@ -33,14 +33,14 @@ const notifications = [
     read: true,
     type: 'new_job',
     author: { name: 'Fran Perez', avatar: '/assets/avatar-5.png' },
-    job: { title: 'Senior Golang Backend Engineer' },
+    job: { title: 'Order 2343242 is delayed due to shortage of a component' },
   },
   {
     id: 'EV-002',
     createdAt: dayjs().subtract(4, 'minute').subtract(5, 'hour').subtract(7, 'day').toDate(),
     read: true,
     type: 'new_feature',
-    description: 'Logistics management is now available',
+    description: 'Order 234515 is Shipped',
   },
   {
     id: 'EV-001',
@@ -48,7 +48,7 @@ const notifications = [
     read: true,
     type: 'new_company',
     author: { name: 'Jie Yan', avatar: '/assets/avatar-8.png' },
-    company: { name: 'Stripe' },
+    company: { name: 'Order 995543 Cancelled by Customer EMC Corp.' },
   },
 ];
 
@@ -115,7 +115,7 @@ function NotificationContent({ notification }) {
           <ChatTextIcon fontSize="var(--Icon-fontSize)" />
         </Avatar>
         <div>
-          <Typography variant="subtitle2">New feature!</Typography>
+          <Typography variant="subtitle2">Shipping Notice!</Typography>
           <Typography variant="body2">{notification.description}</Typography>
           <Typography color="text.secondary" variant="caption">
             {dayjs(notification.createdAt).format('MMM D, hh:mm A')}
@@ -161,7 +161,7 @@ function NotificationContent({ notification }) {
             <Typography component="span" variant="subtitle2">
               {notification.author.name}
             </Typography>{' '}
-            added a new job{' '}
+            added :{' '}
             <Link underline="always" variant="body2">
               {notification.job.title}
             </Link>

@@ -1,23 +1,44 @@
 import React, { useState } from 'react';
+import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
+import Checkbox from '@mui/material/Checkbox';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormGroup from '@mui/material/FormGroup';
+import LinearProgress from '@mui/material/LinearProgress';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import Typography from '@mui/material/Typography';
 
 import EmailDialog from './emaildialog';
 
+const LoadingOverlay = () => (
+  <Backdrop
+    sx={{
+      color: '#fff',
+      zIndex: (theme) => theme.zIndex.drawer + 1,
+      position: 'absolute',
+    }}
+    open={true}
+  >
+    <LinearProgress color="inherit" sx={{ position: 'absolute', top: 0, left: 0, right: 0 }} />
+  </Backdrop>
+);
 const OrderCard = ({ order }) => {
   const company = order['Customer Name'];
   const poNumber = order['Customer PO Number'];
   const status = order['Status'];
   const summary = order.comments;
   const [open, setOpen] = useState(false);
+  const [showAiResponse, setShowAiResponse] = useState(false);
+  const [showNotificationConfig, setShowNotificationConfig] = useState(false);
+
   const [isLoading, setIsLoading] = useState(false);
   const [emailData, setEmailData] = useState({
     to: '',
@@ -54,6 +75,20 @@ const OrderCard = ({ order }) => {
     setOpen(false);
   };
 
+  const handleAskAi = () => {
+    if (!showAiResponse) {
+      setIsLoading(true);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 1000);
+    }
+    setShowAiResponse(!showAiResponse);
+  };
+
+  const handleNotificationConfig = () => {
+    setShowNotificationConfig(!showNotificationConfig);
+  };
+
   return (
     <>
       <Card variant="outlined" sx={{ maxWidth: 600, width: '100%', margin: 'auto', mt: 2 }}>
@@ -81,14 +116,83 @@ const OrderCard = ({ order }) => {
             </Table>
           </TableContainer>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
-            <Button variant="contained" color="primary">
+            <Button variant="contained" color="primary" onClick={handleAskAi}>
               Ask AI
             </Button>
-            <Button variant="contained" color="secondary">
+            <Button variant="contained" color="secondary" onClick={handleNotificationConfig}>
               Create Customer Notification
             </Button>
             <Button variant="contained" color="info" onClick={handleClickOpen}>
               Draft Customer Email
+            </Button>
+          </Box>
+          <Box
+            sx={{
+              mt: 2,
+              overflow: 'hidden',
+              transition: 'max-height 0.3s ease-out',
+              maxHeight: showAiResponse ? '1000px' : '0px',
+            }}
+          >
+            {isLoading && <LoadingOverlay />}
+            <Box sx={{ overflowX: 'hidden', overflowY: 'auto', minHeight: '600px', maxHeight: '800px' }}>
+              {/* Warning: The following code contains unsafe elements and should not be used in production */}
+              {/* Embedding external content via iframes and injecting scripts can pose security risks */}
+
+              <div
+                style={{ minHeight: '500px' }}
+                dangerouslySetInnerHTML={{
+                  __html: `
+    <!-- Embed this line anywhere in your website to add the chatbot -->
+    <iframe
+      id="TurgonChatBot" 
+      src="https://www.turgon.ai/cschat?id=${order.id}&endpoint=api/sghpo/cschat" 
+      scrolling="yes"
+      style="width: 100%; height: 600px;
+             border: 0; background-color: transparent; overflow: scroll;"
+    ></iframe>
+
+    <script>
+      const iframe = document.getElementById("TurgonChatBot");
+      window.addEventListener("message", (event) => {
+        const type = event.data.type;
+        if (type === "resize") {
+          iframe.style.height = event.data.h;
+          iframe.style.width = event.data.w;
+          iframe.style.minHeight = event.data.mh;
+          iframe.style.minWidth = event.data.mw;
+        }
+      });
+    </script>
+  `,
+                }}
+              />
+            </Box>
+          </Box>
+
+          <Box
+            sx={{
+              mt: 2,
+              overflow: 'hidden',
+              transition: 'max-height 0.3s ease-out',
+              maxHeight: showNotificationConfig ? '1000px' : '0px',
+            }}
+          >
+            <Typography variant="h6" sx={{ mb: 2 }}>
+              Notification Config
+            </Typography>
+            <Typography variant="body1" sx={{ mb: 2 }}>
+              Notify me if:
+            </Typography>
+            <FormGroup>
+              <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2 }}>
+                <FormControlLabel control={<Checkbox />} label="Status is Changed" />
+                <FormControlLabel control={<Checkbox />} label="Order is Cancelled" />
+                <FormControlLabel control={<Checkbox />} label="Order is Delayed" />
+              </Box>
+            </FormGroup>
+            <Button variant="contained" color="primary" sx={{ mt: 2 }}>
+              Create Notification
             </Button>
           </Box>
         </CardContent>
