@@ -183,7 +183,14 @@ export default function PoUpload(params) {
   };
 
   return (
-    <Stack spacing={1} marginTop={topMargin}>
+    <Stack
+      spacing={1}
+      sx={{
+        width: '100%',
+        background: 'linear-gradient(to bottom, #9FB1DA, #DDB7D2)',
+        minHeight: '100vh', // This sets the minimum height to the full viewport height
+      }}
+    >
       <Link href="/dashboard/sgh" passHref>
         <Typography
           component="a"

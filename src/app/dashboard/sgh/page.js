@@ -68,7 +68,10 @@ export default function Page() {
       });
     };
     const fetchNotifications = async () => {
-      const { data: notifications } = await supabaseClient.from('notifications').select('*');
+      const { data: notifications } = await supabaseClient
+        .from('notifications')
+        .select('*')
+        .order('id', { ascending: true });
       setNotifications(notifications);
     };
     fetchOrderCounts();
@@ -117,7 +120,7 @@ export default function Page() {
           Go
         </Button>
       </Box>
-      <Grid container spacing={3} sx={{ width: '100%' }}>
+      <Grid container spacing={3} sx={{ width: '80%', maxWidth: 1200, minWidth: 1050 }}>
         <Grid item xs={8}>
           <Stack spacing={3}>
             <Card sx={{ padding: 3 }}>
@@ -131,7 +134,7 @@ export default function Page() {
                 <Chip label={`${ordercounts.cancelledOrders} Cancelled Orders`} color="error" /> since your last log in.
               </Typography>
               <Stack direction="row" spacing={2} sx={{ marginTop: 5 }}>
-                <Link href="/dashboard/sgh/orders?status=New" passHref>
+                <Link href="/dashboard/sgh/orders?status=Cancelled" passHref>
                   <Box
                     sx={{
                       flex: 1,

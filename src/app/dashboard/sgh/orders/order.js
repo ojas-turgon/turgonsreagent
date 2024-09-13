@@ -4,9 +4,6 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import Checkbox from '@mui/material/Checkbox';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormGroup from '@mui/material/FormGroup';
 import LinearProgress from '@mui/material/LinearProgress';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -14,9 +11,9 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Typography from '@mui/material/Typography';
 
 import EmailDialog from './emaildialog';
+import NotificationDialog from './notificationDialog';
 
 const LoadingOverlay = () => (
   <Backdrop
@@ -91,7 +88,7 @@ const OrderCard = ({ order }) => {
 
   return (
     <>
-      <Card variant="outlined" sx={{ maxWidth: 600, width: '100%', margin: 'auto', mt: 2 }}>
+      <Card variant="outlined" sx={{ maxWidth: 1000, width: '80%', margin: 'auto', mt: 2 }}>
         <CardContent>
           <TableContainer
             sx={{ border: '1px solid #e0e0e0', borderRadius: '4px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}
@@ -170,31 +167,7 @@ const OrderCard = ({ order }) => {
             </Box>
           </Box>
 
-          <Box
-            sx={{
-              mt: 2,
-              overflow: 'hidden',
-              transition: 'max-height 0.3s ease-out',
-              maxHeight: showNotificationConfig ? '1000px' : '0px',
-            }}
-          >
-            <Typography variant="h6" sx={{ mb: 2 }}>
-              Notification Config
-            </Typography>
-            <Typography variant="body1" sx={{ mb: 2 }}>
-              Notify me if:
-            </Typography>
-            <FormGroup>
-              <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2 }}>
-                <FormControlLabel control={<Checkbox />} label="Status is Changed" />
-                <FormControlLabel control={<Checkbox />} label="Order is Cancelled" />
-                <FormControlLabel control={<Checkbox />} label="Order is Delayed" />
-              </Box>
-            </FormGroup>
-            <Button variant="contained" color="primary" sx={{ mt: 2 }}>
-              Create Notification
-            </Button>
-          </Box>
+          <NotificationDialog open={showNotificationConfig} handleClose={handleNotificationConfig} />
         </CardContent>
       </Card>
       <EmailDialog open={open} handleClose={handleClose} emailData={emailData} isLoading={isLoading} />

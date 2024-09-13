@@ -78,5 +78,6 @@ module.exports = {
     'react/jsx-key': 'off',
     '@typescript-eslint/no-shadow': 'off',
     'jsx-a11y/no-autofocus': 'off',
+    'unicorn/filename-case': 'off',
   },
 };

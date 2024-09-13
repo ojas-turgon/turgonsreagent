@@ -33,11 +33,14 @@ export default function Page({ searchParams }) {
   }, []);
 
   return (
-    <Stack spacing={2} sx={{ 
-      width: '100%', 
-      background: 'linear-gradient(to bottom, #9FB1DA, #DDB7D2)',
-      minHeight: '100vh' // This sets the minimum height to the full viewport height
-    }}>
+    <Stack
+      spacing={2}
+      sx={{
+        width: '100%',
+        background: 'linear-gradient(to bottom, #9FB1DA, #DDB7D2)',
+        minHeight: '100vh', // This sets the minimum height to the full viewport height
+      }}
+    >
       <Link href="/dashboard/sgh" passHref>
         <Typography
           component="a"
@@ -55,6 +58,10 @@ export default function Page({ searchParams }) {
           &lt; Back to Dashboard
         </Typography>
       </Link>
+
+      <Typography variant="h4" sx={{ textAlign: 'left', marginBottom: '20px', marginLeft: '20%' }}>
+        I have found {orders.length} {status ? status.toLowerCase() : ''} orders:
+      </Typography>
       {orders.map((order) => (
         <OrderCard key={order.id} order={order} />
       ))}

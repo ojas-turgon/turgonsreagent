@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Backdrop from '@mui/material/Backdrop';
 import Button from '@mui/material/Button';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -7,7 +7,8 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import TextField from '@mui/material/TextField';
-import { PaperPlaneRight as SendIcon } from '@phosphor-icons/react';
+import Typography from '@mui/material/Typography';
+import { CheckCircle as CheckCircleIcon, PaperPlaneRight as SendIcon } from '@phosphor-icons/react';
 
 const LoadingOverlay = () => (
   <Backdrop
@@ -22,7 +23,35 @@ const LoadingOverlay = () => (
   </Backdrop>
 );
 
+const SendingOverlay = () => (
+  <>
+    <CircularProgress color="inherit" sx={{ marginRight: 2 }} />
+    <Typography variant="body1">Sending ...</Typography>
+  </>
+);
+
+const SentOverlay = () => (
+  <>
+    <CheckCircleIcon color="green" sx={{ marginRight: 2, fontSize: 64 }} />
+    <Typography variant="body1">Email Sent!</Typography>
+  </>
+);
+
 const EmailDialog = ({ open, handleClose, emailData, isLoading }) => {
+  const [isSending, setIsSending] = useState(false);
+  const [isSent, setIsSent] = useState(false);
+  const handleSend = () => {
+    setIsSending(true);
+    // Send email
+    setTimeout(() => {
+      setIsSending(false);
+      setIsSent(true);
+      setTimeout(() => {
+        setIsSent(false);
+        handleClose();
+      }, 2000);
+    }, 2000);
+  };
   return (
     <Dialog open={open} onClose={handleClose} fullWidth maxWidth="md">
       <DialogTitle>Draft Customer Email</DialogTitle>
@@ -37,7 +66,7 @@ const EmailDialog = ({ open, handleClose, emailData, isLoading }) => {
             type="email"
             variant="outlined"
             style={{ flex: 1, marginRight: '8px' }}
-            value={emailData.to}
+            defaultValue={emailData.to}
           />
           <TextField
             margin="dense"
@@ -46,7 +75,7 @@ const EmailDialog = ({ open, handleClose, emailData, isLoading }) => {
             type="email"
             variant="outlined"
             style={{ flex: 1 }}
-            value={emailData.cc}
+            defaultValue={emailData.cc}
           />
         </div>
         <div style={{ display: 'flex', alignItems: 'center', marginBottom: '8px' }}>
@@ -57,7 +86,7 @@ const EmailDialog = ({ open, handleClose, emailData, isLoading }) => {
             type="email"
             variant="outlined"
             style={{ flex: 1, marginRight: '8px' }}
-            value={emailData.from}
+            defaultValue={emailData.from}
           />
           <TextField
             margin="dense"
@@ -66,7 +95,7 @@ const EmailDialog = ({ open, handleClose, emailData, isLoading }) => {
             type="text"
             variant="outlined"
             style={{ flex: 1 }}
-            value={emailData.subject}
+            defaultValue={emailData.subject}
           />
         </div>
         <TextField
@@ -77,15 +106,17 @@ const EmailDialog = ({ open, handleClose, emailData, isLoading }) => {
           rows={12}
           fullWidth
           variant="outlined"
-          value={emailData.content}
+          defaultValue={emailData.content}
         />
       </DialogContent>
       <DialogActions>
+        {isSending && <SendingOverlay />}
+        {isSent && <SentOverlay />}
         <Button onClick={handleClose} color="primary">
           Cancel
         </Button>
         <Button
-          onClick={handleClose}
+          onClick={handleSend}
           color="success"
           variant="contained"
           size="large"
