@@ -143,7 +143,7 @@ const OrderCard = ({ order }) => {
     <!-- Embed this line anywhere in your website to add the chatbot -->
     <iframe
       id="TurgonChatBot" 
-      src="https://turgon-corp.vercel.app/cschat?id=${order.id}&endpoint=api/sghpo/cschat" 
+      src="https://old.turgon.ai/cschat?id=${order.id}&endpoint=api/sghpo/cschat" 
       scrolling="yes"
       style="width: 100%; height: 600px;
              border: 0; background-color: transparent; overflow: scroll;"
