@@ -22,15 +22,25 @@ export default function Page({ searchParams }) {
         return;
       }
       if (status) {
-        const { data: ordersList } = await supabaseClient.from('orders').select('*').eq('Status', status);
-        setOrders(ordersList);
+        const { data: ordersList, error } = await supabaseClient.from('orders').select('*').eq('Status', status);
+        if (error) {
+          console.error('Error fetching orders:', error);
+          setOrders([]);
+          return;
+        }
+        setOrders(ordersList || []);
       } else {
-        const { data: ordersList } = await supabaseClient.from('orders').select('*');
-        setOrders(ordersList);
+        const { data: ordersList, error } = await supabaseClient.from('orders').select('*');
+        if (error) {
+          console.error('Error fetching orders:', error);
+          setOrders([]);
+          return;
+        }
+        setOrders(ordersList || []);
       }
     };
     fetchOrders();
-  }, []);
+  }, [status]);
 
   return (
     <Stack
