@@ -28,6 +28,57 @@ import { DataTable } from '@/components/core/data-table';
 import { useOrdersSelection } from './orders-selection-context';
 import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Button, Divider } from '@mui/material';
 
+// Component to handle dialog state for each row
+function IssueIdCell({ row }) {
+  const [dialogOpen, setDialogOpen] = React.useState(false);
+
+  return (
+    <Stack direction="row" spacing={2} sx={{ alignItems: 'center' }}>
+      <div>
+        <Link
+          color="text.primary"
+          component={RouterLink}
+          href={paths.dashboard.orders.details(row.id)}
+          sx={{ cursor: 'pointer' }}
+          variant="subtitle2"
+        >
+          {row.issueid}
+        </Link>
+      </div>{' '}
+      <Chip icon={<RepeatIcon />} label={row.numoccur} color="error" />
+      <Chip
+        icon={<TreePalmIcon />}
+        label={row.cascadingerrors ? row.cascadingerrors.split('\n').length : 0}
+        color="success"
+        onClick={() => setDialogOpen(true)}
+      />
+      <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)}>
+        <DialogTitle>Cascading Errors</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            These cascading errors followed the original error, and have a root cause that is this issue. Once we fix the orignal issue, these errors will automatically be fixed. They do not need independent remidiation.   They are therefore lumped together under this issue.
+          </DialogContentText>
+          <Divider sx={{ my: 2 }} />
+          <Typography variant="body1">
+            {row.cascadingerrors ? (
+              row.cascadingerrors.split('\n').map((line, index) => (
+                <React.Fragment key={index}>
+                  {line}
+                  <br />
+                </React.Fragment>
+              ))
+            ) : (
+              'No cascading errors found.'
+            )}
+          </Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setDialogOpen(false)}>Close</Button>
+        </DialogActions>
+      </Dialog>
+    </Stack>
+  );
+}
 
 const columns = [
   {
@@ -51,54 +102,7 @@ const columns = [
     width: '30px',
   },
   {
-    formatter: (row) => {
-      const [dialogOpen, setDialogOpen] = React.useState(false);
-      return (
-        <Stack direction="row" spacing={2} sx={{ alignItems: 'center' }}>
-          <div>
-            <Link
-              color="text.primary"
-              component={RouterLink}
-              href={paths.dashboard.orders.details(row.id)}
-              sx={{ cursor: 'pointer' }}
-              variant="subtitle2"
-            >
-              {row.issueid}
-            </Link>
-
-            {/* <Typography color="text.secondary" variant="body2">
-            {row.lineItems} products •{' '}
-            <Box component="span" sx={{ whiteSpace: 'nowrap' }}>
-              {new Intl.NumberFormat('en-US', { style: 'currency', currency: row.currency }).format(row.totalAmount)}
-            </Box>
-          </Typography> */}
-          </div>{' '}
-          <Chip icon={<RepeatIcon />} label={row.numoccur} color="error" />
-          <Chip icon={<TreePalmIcon />} label={row.cascadingerrors ? row.cascadingerrors.split('\n').length : 0} color="success" onClick={() => setDialogOpen(true)} />
-          <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)}>
-            <DialogTitle>Cascading Errors</DialogTitle>
-            <DialogContent>
-              <DialogContentText>
-                These cascading errors followed the original error, and have a root cause that is this issue. Once we fix the orignal issue, these errors will automatically be fixed. They do not need independent remidiation.   They are therefore lumped together under this issue.
-              </DialogContentText>
-              <Divider sx={{ my: 2 }} />
-              {/* Add content for cascading errors here */}
-              <Typography variant="body1">
-                {row.cascadingerrors.split('\n').map((line, index) => (
-                  <React.Fragment key={index}>
-                    {line}
-                    <br />
-                  </React.Fragment>
-                ))}
-              </Typography>
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={() => setDialogOpen(false)}>Close</Button>
-            </DialogActions>
-          </Dialog>
-          </Stack>
-      );
-    },
+    formatter: (row) => <IssueIdCell row={row} />,
     name: 'Issue ID',
     width: '150px',
   },

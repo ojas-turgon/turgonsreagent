@@ -50,7 +50,7 @@ const OrderCard = ({ order }) => {
 
     try {
       setIsLoading(true);
-      const response = await fetch('https://turgon-corp.vercel.app/api/sghpo/genemail', {
+      const response = await fetch('https://old.turgon.ai/api/sghpo/genemail', {
         method: 'POST',
         body: JSON.stringify(order),
         headers: {
@@ -142,8 +142,8 @@ const OrderCard = ({ order }) => {
                   __html: `
     <!-- Embed this line anywhere in your website to add the chatbot -->
     <iframe
-      id="TurgonChatBot" 
-      src="https://www.turgon-corp.vercel.app/cschat?id=${order.id}&endpoint=api/sghpo/cschat" 
+      id="TurgonChatBot"
+      src="https://old.turgon.ai/cschat?id=${order.id}&endpoint=api/sghpo/cschat"
       scrolling="yes"
       style="width: 100%; height: 600px;
              border: 0; background-color: transparent; overflow: scroll;"

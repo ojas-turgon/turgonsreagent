@@ -236,7 +236,7 @@ export default function Page({ params }) {
     <!-- Embed this line anywhere in your website to add the chatbot -->
     <iframe
       id="TurgonChatBot" 
-      src="https://turgon-corp.vercel.app/cschat?id=${orderId}" 
+      src="https://old.turgon.ai/cschat?id=${orderId}" 
       scrolling="yes"
       style="width: 100%; height: 600px;
              border: 0; background-color: transparent; overflow: scroll;"

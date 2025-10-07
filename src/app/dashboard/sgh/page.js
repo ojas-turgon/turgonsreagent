@@ -68,11 +68,19 @@ export default function Page() {
       });
     };
     const fetchNotifications = async () => {
-      const { data: notifications } = await supabaseClient
+      if (!supabaseUrl || !supabaseKey) {
+        return;
+      }
+      const { data: notifications, error } = await supabaseClient
         .from('notifications')
         .select('*')
         .order('id', { ascending: true });
-      setNotifications(notifications);
+      if (error) {
+        console.error('Error fetching notifications:', error);
+        setNotifications([]);
+        return;
+      }
+      setNotifications(notifications || []);
     };
     fetchOrderCounts();
     fetchNotifications();
@@ -262,31 +270,37 @@ export default function Page() {
             <Typography variant="h5" component="h2" gutterBottom>
               Notifications
             </Typography>
-            {notifications.map((notification) => (
-              <Card sx={{ padding: 3, backgroundColor: '#f1f1f1', marginBottom: 2, marginTop: 2 }}>
-                <Typography variant="h6" component="h3">
-                  {notification.text}
-                </Typography>
-                <Typography variant="body2" color="textSecondary">
-                  {new Date(notification.timestamp).toLocaleString('en-US', {
-                    hour: 'numeric',
-                    minute: 'numeric',
-                    hour12: true,
-                    month: 'long',
-                    day: 'numeric',
-                    year: 'numeric',
-                  })}
-                </Typography>
-                <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-                  <IconButton>
-                    <CheckIcon />
-                  </IconButton>
-                  <IconButton>
-                    <CloseIcon />
-                  </IconButton>
-                </Box>
-              </Card>
-            ))}
+            {notifications && notifications.length > 0 ? (
+              notifications.map((notification) => (
+                <Card key={notification.id} sx={{ padding: 3, backgroundColor: '#f1f1f1', marginBottom: 2, marginTop: 2 }}>
+                  <Typography variant="h6" component="h3">
+                    {notification.text}
+                  </Typography>
+                  <Typography variant="body2" color="textSecondary">
+                    {new Date(notification.timestamp).toLocaleString('en-US', {
+                      hour: 'numeric',
+                      minute: 'numeric',
+                      hour12: true,
+                      month: 'long',
+                      day: 'numeric',
+                      year: 'numeric',
+                    })}
+                  </Typography>
+                  <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+                    <IconButton>
+                      <CheckIcon />
+                    </IconButton>
+                    <IconButton>
+                      <CloseIcon />
+                    </IconButton>
+                  </Box>
+                </Card>
+              ))
+            ) : (
+              <Typography variant="body2" color="textSecondary" sx={{ marginTop: 2 }}>
+                No notifications at this time.
+              </Typography>
+            )}
           </Card>
         </Grid>
       </Grid>
