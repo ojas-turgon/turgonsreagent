@@ -57,7 +57,7 @@ export default function PoUpload(params) {
     setPdfFile(data.file[0]);
 
     try {
-      const response = await fetch('https://www.turgon.ai/api/sghpo', {
+      const response = await fetch('https://turgon-corp.vercel.app/api/sghpo', {
         method: 'POST',
         body: formData,
       });
